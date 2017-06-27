@@ -152,7 +152,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 You can run the tests with:
 
 ```bash
-vendor/bin/phpunit
+composer test
 ```
 
 ## Contributing
