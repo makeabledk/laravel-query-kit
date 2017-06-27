@@ -1,12 +1,14 @@
 {
     "name": "makeabledk/laravel-querykit",
+    "license": "CC-BY-SA-4.0",
     "autoload": {
         "psr-4": {
             "Makeable\\QueryKit\\": "src/"
         }
     },
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "laravel/framework": "5.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~5.7",
