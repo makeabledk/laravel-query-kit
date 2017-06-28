@@ -7,7 +7,7 @@ use Makeable\QueryKit\Tests\TestModel;
 
 class QueryScopesTest extends TestCase
 {
-    protected function create($name, $age=null)
+    protected function create($name, $age = null)
     {
         return TestModel::create(['name' => $name, 'age' => $age]);
     }

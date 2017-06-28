@@ -6,7 +6,6 @@ use Makeable\QueryKit\QueryKit;
 
 class TestModel extends \Illuminate\Database\Eloquent\Model
 {
-
     use QueryKit;
 
     /**
