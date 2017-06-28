@@ -29,6 +29,6 @@ trait QueryKit
      */
     public function checkScopeFails($name, ...$args)
     {
-        return !$this->checkScope($name, ...$args);
+        return ! $this->checkScope($name, ...$args);
     }
 }

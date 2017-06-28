@@ -101,7 +101,7 @@ class Builder
     {
         $method = Str::camel('scope_'.$name);
 
-        if (!method_exists($this->model, $method)) {
+        if (! method_exists($this->model, $method)) {
             throw new BadMethodCallException('Scope method could not be resolved: '.$method);
         }
 

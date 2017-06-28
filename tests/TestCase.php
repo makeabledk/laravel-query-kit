@@ -2,16 +2,12 @@
 
 namespace Makeable\QueryKit\Tests;
 
-use Makeable\QueryKit\QueryKitServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
+use Makeable\QueryKit\QueryKitServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
-
-    /**
-     *
-     */
     public function setUp()
     {
         parent::setUp();
@@ -26,7 +22,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            QueryKitServiceProvider::class
+            QueryKitServiceProvider::class,
         ];
     }
 
