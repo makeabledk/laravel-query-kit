@@ -22,7 +22,7 @@ class BehaviorTest extends TestCase
         $johnSenior = $class::create(['name' => 'John', 'age' => 40]);
         $johnJunior = $class::create(['name' => 'John', 'age' => 10]);
 
-        $this->assertTrue($johnSenior->checkScope('johnSenior'));
-        $this->assertFalse($johnJunior->checkScope('johnSenior'));
+        $this->assertTrue($johnSenior->passesScope('johnSenior'));
+        $this->assertFalse($johnJunior->passesScope('johnSenior'));
     }
 }

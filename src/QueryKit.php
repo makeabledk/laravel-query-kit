@@ -14,7 +14,7 @@ trait QueryKit
      *
      * @return mixed
      */
-    public function checkScope($name, ...$args)
+    public function passesScope($name, ...$args)
     {
         return Builder::make($this, $name, ...$args)->toCheck();
     }
@@ -27,8 +27,8 @@ trait QueryKit
      *
      * @return mixed
      */
-    public function checkScopeFails($name, ...$args)
+    public function failsScope($name, ...$args)
     {
-        return ! $this->checkScope($name, ...$args);
+        return ! $this->passesScope($name, ...$args);
     }
 }

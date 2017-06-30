@@ -55,15 +55,15 @@ class Person extends Eloquent {
 ```php
 $john = new Person(['name' => 'John']);
 
-$john->checkScope('nameIs', 'John'); // true
-$john->checkScope('nameIs', 'Doe'); // false
+$john->passesScope('nameIs', 'John'); // true
+$john->passesScope('nameIs', 'Doe'); // false
 ```
 
 Pretty cool, right?
 
 ## Provided methods
 
-### checkScope
+### passesScope
 ```php
 /**
  * Check if a model passes the given scope
@@ -72,16 +72,16 @@ Pretty cool, right?
  * @param array ...$args
  * @return mixed
  */
-public function checkScope($name, ...$args)
+public function passesScope($name, ...$args)
 ```
 
 Example:
 ```php
 $john = new Person(['name' => 'John']);
-$john->checkScope('nameIs', 'John'); // true
+$john->passesScope('nameIs', 'John'); // true
 ```
 
-### checkScopeFails
+### failsScope
 ```php
 /**
  * Check if a model fails the given scope
@@ -90,16 +90,16 @@ $john->checkScope('nameIs', 'John'); // true
  * @param array ...$args
  * @return mixed
  */
-public function checkScopeFails($name, ...$args)
+public function failsScope($name, ...$args)
 {
-    return ! $this->checkScope($name, ...$args);
+    return ! $this->passesScope($name, ...$args);
 }
 ```
 
 Example:
 ```php
 $john = new Person(['name' => 'John']);
-$john->checkScopeFails('nameIs', 'John'); // true
+$john->failsScope('nameIs', 'John'); // true
 ```
 
 ## Current limitations

@@ -15,57 +15,57 @@ class QueryScopesTest extends TestCase
     public function test_basic_where()
     {
         $person = $this->create('John Doe', 27);
-        $this->assertTrue($person->checkScope('nameIs', 'John Doe'));
-        $this->assertFalse($person->checkScope('nameIs', 'John'));
+        $this->assertTrue($person->passesScope('nameIs', 'John Doe'));
+        $this->assertFalse($person->passesScope('nameIs', 'John'));
     }
 
     public function test_check_scope_fails()
     {
         $person = $this->create('Jane', null);
-        $this->assertTrue($person->checkScopeFails('nameIs', 'John'));
+        $this->assertTrue($person->failsScope('nameIs', 'John'));
     }
 
     public function test_where_with_operators()
     {
         $person = $this->create('John Doe', 27);
-        $this->assertTrue($person->checkScope('age', '=', 27));
-        $this->assertTrue($person->checkScope('age', '>', 26));
-        $this->assertTrue($person->checkScope('age', '<', 28));
-        $this->assertTrue($person->checkScope('age', '<=', 27));
-        $this->assertTrue($person->checkScope('age', '>=', 27));
-        $this->assertTrue($person->checkScope('age', '<>', 26));
-        $this->assertFalse($person->checkScope('age', '<>', 27));
+        $this->assertTrue($person->passesScope('age', '=', 27));
+        $this->assertTrue($person->passesScope('age', '>', 26));
+        $this->assertTrue($person->passesScope('age', '<', 28));
+        $this->assertTrue($person->passesScope('age', '<=', 27));
+        $this->assertTrue($person->passesScope('age', '>=', 27));
+        $this->assertTrue($person->passesScope('age', '<>', 26));
+        $this->assertFalse($person->passesScope('age', '<>', 27));
     }
 
     public function test_where_like()
     {
         $person = $this->create('John Doe');
-        $this->assertTrue($person->checkScope('nameLike', 'John Doe'));
-        $this->assertTrue($person->checkScope('nameLike', 'Joh%'));
-        $this->assertTrue($person->checkScope('nameLike', '_ohn%'));
-        $this->assertTrue($person->checkScope('nameLike', '%Doe'));
-        $this->assertFalse($person->checkScope('nameLike', 'John'));
-        $this->assertFalse($person->checkScope('nameLike', '_John%'));
+        $this->assertTrue($person->passesScope('nameLike', 'John Doe'));
+        $this->assertTrue($person->passesScope('nameLike', 'Joh%'));
+        $this->assertTrue($person->passesScope('nameLike', '_ohn%'));
+        $this->assertTrue($person->passesScope('nameLike', '%Doe'));
+        $this->assertFalse($person->passesScope('nameLike', 'John'));
+        $this->assertFalse($person->passesScope('nameLike', '_John%'));
     }
 
     public function test_where_in()
     {
         $person = $this->create('John Doe', 27);
-        $this->assertTrue($person->checkScope('nameIn', ['Jane Doe', 'John Doe']));
-        $this->assertFalse($person->checkScope('nameIn', ['Jane Doe', 'John']));
+        $this->assertTrue($person->passesScope('nameIn', ['Jane Doe', 'John Doe']));
+        $this->assertFalse($person->passesScope('nameIn', ['Jane Doe', 'John']));
     }
 
     public function test_where_null()
     {
         $person = $this->create('John Doe', null);
-        $this->assertTrue($person->checkScope('noAge'));
+        $this->assertTrue($person->passesScope('noAge'));
     }
 
     public function test_where_not_null()
     {
         $jane = $this->create('Jane Doe', 27);
         $john = $this->create('John Doe', null);
-        $this->assertTrue($jane->checkScope('hasAge'));
-        $this->assertFalse($john->checkScope('hasAge'));
+        $this->assertTrue($jane->passesScope('hasAge'));
+        $this->assertFalse($john->passesScope('hasAge'));
     }
 }
