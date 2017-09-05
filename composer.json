@@ -8,16 +8,22 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "laravel/framework": "5.*"
+        "illuminate/support": "^5.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5.7",
-        "orchestra/testbench": "~3.0",
+        "orchestra/testbench": "~3.5",
         "friendsofphp/php-cs-fixer": "^2.3"
     },
     "autoload-dev": {
         "psr-4": {
             "Makeable\\QueryKit\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Makeable\\QueryKit\\QueryKitServiceProvider"
+            ]
         }
     },
     "scripts": {

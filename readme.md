@@ -18,7 +18,7 @@ You can install this package via composer:
 composer require makeabledk/laravel-querykit
 ```
 
-Add the service provider to your config/app.php:
+For Laravel version prior 5.5: Add the service provider to your config/app.php:
 
 ```php
 'providers' => [
