@@ -50,4 +50,14 @@ class TestCase extends Orchestra
             $table->integer('age')->nullable();
         });
     }
+
+    /**
+     * @param $name
+     * @param null $age
+     * @return TestModel
+     */
+    protected function create($name, $age = null)
+    {
+        return TestModel::create(['name' => $name, 'age' => $age]);
+    }
 }

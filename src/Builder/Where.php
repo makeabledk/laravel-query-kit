@@ -84,6 +84,6 @@ class Where implements QueryConstraint
             $operator = '=';
         }
 
-        return [$property, $operator, $value];
+        return [$property, strtolower($operator), $value];
     }
 }

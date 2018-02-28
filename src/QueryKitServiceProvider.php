@@ -4,6 +4,7 @@ namespace Makeable\QueryKit;
 
 use Illuminate\Support\ServiceProvider;
 use Makeable\QueryKit\Builder\Builder;
+use Makeable\QueryKit\Builder\OrWhere;
 use Makeable\QueryKit\Builder\Where;
 use Makeable\QueryKit\Builder\WhereIn;
 use Makeable\QueryKit\Builder\WhereNotNull;
@@ -16,6 +17,7 @@ class QueryKitServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Builder::registerConstraint(OrWhere::class);
         Builder::registerConstraint(Where::class);
         Builder::registerConstraint(WhereIn::class);
         Builder::registerConstraint(WhereNull::class);

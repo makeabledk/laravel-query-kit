@@ -2,6 +2,7 @@
 
 namespace Makeable\QueryKit\Tests;
 
+use Makeable\QueryKit\Builder\Builder;
 use Makeable\QueryKit\QueryKit;
 
 class TestModel extends \Illuminate\Database\Eloquent\Model
@@ -24,9 +25,9 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false;
 
     /**
-     * @param $query
+     * @param Builder $query
      * @param $name
-     * @return mixed
+     * @return Builder
      */
     public function scopeNameIs($query, $name)
     {
@@ -34,9 +35,9 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param $query
+     * @param Builder $query
      * @param $name
-     * @return mixed
+     * @return Builder
      */
     public function scopeNameLike($query, $name)
     {
@@ -44,9 +45,9 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param $query
+     * @param Builder $query
      * @param $names
-     * @return mixed
+     * @return Builder
      */
     public function scopeNameIn($query, $names)
     {
@@ -54,10 +55,10 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param $query
+     * @param Builder $query
      * @param $operator
      * @param $age
-     * @return mixed
+     * @return Builder
      */
     public function scopeAge($query, $operator, $age)
     {
@@ -65,8 +66,8 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param $query
-     * @return mixed
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeHasAge($query)
     {
@@ -74,8 +75,8 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param $query
-     * @return mixed
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeNoAge($query)
     {
@@ -83,11 +84,21 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param $query
-     * @return mixed
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeOld($query)
     {
         return $query->age('>=', 80);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeJaneOrJohn($query)
+    {
+        return $query->where('name', 'LIKE', 'Jane%')
+            ->orWhere('name', 'LIKE', 'John%');
     }
 }

@@ -3,15 +3,9 @@
 namespace Makeable\QueryKit\Tests\Unit;
 
 use Makeable\QueryKit\Tests\TestCase;
-use Makeable\QueryKit\Tests\TestModel;
 
 class QueryScopesTest extends TestCase
 {
-    protected function create($name, $age = null)
-    {
-        return TestModel::create(['name' => $name, 'age' => $age]);
-    }
-
     public function test_basic_where()
     {
         $person = $this->create('John Doe', 27);
@@ -69,9 +63,11 @@ class QueryScopesTest extends TestCase
         $this->assertFalse($john->passesScope('hasAge'));
     }
 
-    public function test_nested_scope_calls()
+    public function test_or_where()
     {
-        $this->assertTrue($this->create('Jane Doe', 80)->passesScope('old'));
-        $this->assertTrue($this->create('Jane Doe', 20)->failsScope('old'));
+        $this->assertTrue($this->create('Jane Doe')->passesScope('janeOrJohn'));
+        $this->assertTrue($this->create('John Doe')->passesScope('janeOrJohn'));
+        $this->assertFalse($this->create('Janine Doe')->passesScope('janeOrJohn'));
     }
+
 }

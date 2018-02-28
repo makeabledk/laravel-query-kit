@@ -25,4 +25,10 @@ class BehaviorTest extends TestCase
         $this->assertTrue($johnSenior->passesScope('johnSenior'));
         $this->assertFalse($johnJunior->passesScope('johnSenior'));
     }
+
+    public function test_nested_scope_calls()
+    {
+        $this->assertTrue($this->create('Jane Doe', 80)->passesScope('old'));
+        $this->assertTrue($this->create('Jane Doe', 20)->failsScope('old'));
+    }
 }
