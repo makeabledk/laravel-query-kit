@@ -68,4 +68,10 @@ class QueryScopesTest extends TestCase
         $this->assertTrue($jane->passesScope('hasAge'));
         $this->assertFalse($john->passesScope('hasAge'));
     }
+
+    public function test_nested_scope_calls()
+    {
+        $this->assertTrue($this->create('Jane Doe', 80)->passesScope('old'));
+        $this->assertTrue($this->create('Jane Doe', 20)->failsScope('old'));
+    }
 }

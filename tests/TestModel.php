@@ -81,4 +81,13 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     {
         return $query->whereNull('age');
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeOld($query)
+    {
+        return $query->age('>=', 80);
+    }
 }

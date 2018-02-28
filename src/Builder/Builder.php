@@ -28,7 +28,7 @@ class Builder
     /**
      * @var array
      */
-    protected $stack = [];
+    protected $stack;
 
     /**
      * Builder constructor.
@@ -38,6 +38,7 @@ class Builder
     public function __construct(Model $model)
     {
         $this->model = $model;
+        $this->stack = new Stack();
     }
 
     // _________________________________________________________________________________________________________________
@@ -54,14 +55,16 @@ class Builder
     {
         // Check macros for registered Query Constraint
         if (static::hasMacro($method)) {
-            return $this->pushStack(call_user_func_array(static::$macros[$method], $parameters));
+            $this->stack->apply(call_user_func_array(static::$macros[$method], $parameters));
+
+            return $this;
         }
 
         try {
             // Check for a scope function
-            return $this->pushStack(
-                call_user_func_array([$this, 'callScopeFunction'], array_merge([$method], $parameters))->stack
-            );
+            $this->callScopeFunction($method, ...$parameters);
+
+            return $this;
         } catch (\BadMethodCallException $e) {
             throw new BadMethodCallException("Method {$method} does not exist.");
         }
@@ -115,11 +118,24 @@ class Builder
      */
     public function toCheck()
     {
-        return collect($this->stack)
-            ->filter(function (QueryConstraint $constraint) {
-                return $constraint->check($this->model);
-            })
-            ->count() === count($this->stack);
+        return $this->stack
+            ->filter(\Closure::fromCallable([$this, 'checkLayer']))
+            ->count() === $this->stack->count();
+    }
+
+    /**
+     * @param array $layer
+     * @return bool
+     */
+    protected function checkLayer($layer)
+    {
+        foreach ($layer as $constraint)
+        {
+            if ($constraint->check($this->model)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -130,18 +146,4 @@ class Builder
         dd($this->stack);
     }
 
-    /**
-     * Stack constraint for this builder.
-     *
-     * @param QueryConstraint $query
-     *
-     * @return Builder
-     */
-    protected function pushStack($query)
-    {
-        $query = is_array($query) ? $query : [$query];
-        $this->stack = array_merge($this->stack, $query);
-
-        return $this;
-    }
 }
