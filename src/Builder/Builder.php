@@ -3,6 +3,7 @@
 namespace Makeable\QueryKit\Builder;
 
 use BadMethodCallException;
+use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
@@ -102,13 +103,15 @@ class Builder
      */
     public function callScopeFunction($name, ...$args)
     {
-        $method = Str::camel('scope_'.$name);
-
-        if (! method_exists($this->model, $method)) {
-            throw new BadMethodCallException('Scope method could not be resolved: '.$method);
+        if (method_exists($this->model, $method = Str::camel('scope_'.$name))) {
+            return $this->model->$method($this, ...$args);
         }
 
-        return $this->model->$method($this, ...$args);
+        if (is_callable($name)) {
+            return call_user_func($name, ...$args);
+        }
+
+        throw new BadMethodCallException('Scope method could not be resolved: '.$method);
     }
 
     // _________________________________________________________________________________________________________________
@@ -116,18 +119,18 @@ class Builder
     /**
      * @return bool
      */
-    public function toCheck()
+    public function check()
     {
-        return $this->stack
-            ->filter(\Closure::fromCallable([$this, 'checkLayer']))
-            ->count() === $this->stack->count();
+        return $this->stack->first(function ($layer) {
+            return ! $this->passesLayer($layer);
+        }) === null;
     }
 
     /**
      * @param array $layer
      * @return bool
      */
-    protected function checkLayer($layer)
+    protected function passesLayer($layer)
     {
         foreach ($layer as $constraint)
         {

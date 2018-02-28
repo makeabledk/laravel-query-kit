@@ -46,17 +46,17 @@ class TestCase extends Orchestra
     {
         $app['db']->connection()->getSchemaBuilder()->create('test_models', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->integer('age')->nullable();
         });
     }
 
     /**
-     * @param $name
+     * @param null $name
      * @param null $age
      * @return TestModel
      */
-    protected function create($name, $age = null)
+    protected function create($name = null, $age = null)
     {
         return TestModel::create(['name' => $name, 'age' => $age]);
     }

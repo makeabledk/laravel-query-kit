@@ -101,4 +101,22 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
         return $query->where('name', 'LIKE', 'Jane%')
             ->orWhere('name', 'LIKE', 'John%');
     }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeHasNameOrAge($query)
+    {
+        return $query->whereNotNull('name')->orWhereNotNull('age');
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeMissingNameOrAge($query)
+    {
+        return $query->whereNull('name')->orWhereNull('age');
+    }
 }

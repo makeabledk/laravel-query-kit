@@ -70,4 +70,19 @@ class QueryScopesTest extends TestCase
         $this->assertFalse($this->create('Janine Doe')->passesScope('janeOrJohn'));
     }
 
+    public function test_or_where_null()
+    {
+        $this->assertFalse($this->create('John', 'John')->passesScope('missingNameOrAge'));
+        $this->assertTrue($this->create(null, 'John')->passesScope('missingNameOrAge'));
+        $this->assertTrue($this->create('John', null)->passesScope('missingNameOrAge'));
+        $this->assertTrue($this->create(null, null)->passesScope('missingNameOrAge'));
+    }
+
+    public function test_or_where_not_null()
+    {
+        $this->assertTrue($this->create('John', 'John')->passesScope('hasNameOrAge'));
+        $this->assertTrue($this->create('John', null)->passesScope('hasNameOrAge'));
+        $this->assertTrue($this->create(null, 'John')->passesScope('hasNameOrAge'));
+        $this->assertFalse($this->create(null, null)->passesScope('hasNameOrAge'));
+    }
 }

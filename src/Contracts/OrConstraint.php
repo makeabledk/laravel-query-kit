@@ -2,7 +2,7 @@
 
 namespace Makeable\QueryKit\Contracts;
 
-interface OrWhereConstraint
+interface OrConstraint
 {
 
 }

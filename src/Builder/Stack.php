@@ -4,7 +4,7 @@ namespace Makeable\QueryKit\Builder;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Makeable\QueryKit\Contracts\OrWhereConstraint;
+use Makeable\QueryKit\Contracts\OrConstraint;
 use Makeable\QueryKit\Contracts\QueryConstraint;
 
 class Stack
@@ -38,7 +38,7 @@ class Stack
      */
     public function apply(QueryConstraint $constraint)
     {
-        if ($this->constraintImplements($constraint, OrWhereConstraint::class)) {
+        if ($this->constraintImplements($constraint, OrConstraint::class)) {
             return $this->forkLast($constraint);
         }
         return $this->push($constraint);

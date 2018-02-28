@@ -16,7 +16,7 @@ trait QueryKit
      */
     public function passesScope($name, ...$args)
     {
-        return Builder::make($this, $name, ...$args)->toCheck();
+        return Builder::make($this, $name, ...$args)->check();
     }
 
     /**
