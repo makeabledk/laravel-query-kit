@@ -94,8 +94,6 @@ class QueryScopesTest extends TestCase
         $this->create('Janine Doe', 27);
         $this->create('Janine Doe', 28);
 
-        dd(TestModel::janeOrJohn()->noAge()->orWhere('age', 27)->get()->toArray());
-
         $this->assertTrue($this->create('John')->passesScope(function ($query) {
             $query->janeOrJohn()->where(function ($query) {
                 $query->age('>', 20)->orWhereNull('age');
