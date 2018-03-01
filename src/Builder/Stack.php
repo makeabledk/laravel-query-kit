@@ -32,6 +32,35 @@ class Stack
         return $this->stack->$method(...$parameters);
     }
 
+
+    /**
+     * @param Stack $stack
+     * @param $model
+     * @return bool
+     */
+    public static function check(Stack $stack, $model)
+    {
+        return $stack->stack->first(function ($layer) use ($model) {
+            return ! static::passesLayer($layer, $model);
+        }) === null;
+    }
+
+    /**
+     * @param array $layer
+     * @param $model
+     * @return bool
+     */
+    protected static function passesLayer($layer, $model)
+    {
+        foreach ($layer as $constraint)
+        {
+            if ($constraint->check($model)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * @param QueryConstraint $constraint
      * @return Collection

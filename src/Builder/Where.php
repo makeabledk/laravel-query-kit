@@ -39,6 +39,10 @@ class Where implements QueryConstraint
      */
     public function check($model)
     {
+        if ($this->isSubQuery()) {
+            return Builder::make($model, $this->property)->check();
+        }
+
         switch ($this->operator) {
             case '=':
                 return $model->{$this->property} === $this->value;
@@ -71,19 +75,29 @@ class Where implements QueryConstraint
     }
 
     /**
+     * @return bool
+     */
+    protected function isSubQuery()
+    {
+        return $this->operator === null && is_callable($this->property);
+    }
+
+    /**
      * @param $property
      * @param $operator
      * @param null $value
      *
      * @return array
      */
-    private function normalize($property, $operator, $value = null)
+    protected function normalize($property, $operator = null, $value = null)
     {
-        if ($value === null) {
+        if ($operator !== null && $value === null) {
             $value = $operator;
             $operator = '=';
         }
 
-        return [$property, strtolower($operator), $value];
+        $operator = $operator === null ? null : strtolower($operator);
+
+        return [$property, $operator, $value];
     }
 }

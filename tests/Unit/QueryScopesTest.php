@@ -3,6 +3,7 @@
 namespace Makeable\QueryKit\Tests\Unit;
 
 use Makeable\QueryKit\Tests\TestCase;
+use Makeable\QueryKit\Tests\TestModel;
 
 class QueryScopesTest extends TestCase
 {
@@ -84,5 +85,27 @@ class QueryScopesTest extends TestCase
         $this->assertTrue($this->create('John', null)->passesScope('hasNameOrAge'));
         $this->assertTrue($this->create(null, 'John')->passesScope('hasNameOrAge'));
         $this->assertFalse($this->create(null, null)->passesScope('hasNameOrAge'));
+    }
+
+    public function test_sub_queries()
+    {
+        $this->create('Jane Doe');
+        $this->create('Jane Doe', 27);
+        $this->create('Janine Doe', 27);
+        $this->create('Janine Doe', 28);
+
+        dd(TestModel::janeOrJohn()->noAge()->orWhere('age', 27)->get()->toArray());
+
+        $this->assertTrue($this->create('John')->passesScope(function ($query) {
+            $query->janeOrJohn()->where(function ($query) {
+                $query->age('>', 20)->orWhereNull('age');
+            });
+        }));
+
+//        $this->assertTrue($this->create('Janine')->passesScope(function ($query) {
+//            $query->janeOrJohn()->where(function ($query) {
+//                $query->age('>', 20)->orWhereNull('age');
+//            });
+//        }));
     }
 }

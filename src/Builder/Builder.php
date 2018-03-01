@@ -103,42 +103,25 @@ class Builder
      */
     public function callScopeFunction($name, ...$args)
     {
-        if (method_exists($this->model, $method = Str::camel('scope_'.$name))) {
+        if (is_string($name) && method_exists($this->model, $method = Str::camel('scope_'.$name))) {
             return $this->model->$method($this, ...$args);
         }
 
         if (is_callable($name)) {
-            return call_user_func($name, ...$args);
+            return tap($this, function () use ($name) {
+                call_user_func($name, $this);
+            });
         }
 
         throw new BadMethodCallException('Scope method could not be resolved: '.$method);
     }
-
-    // _________________________________________________________________________________________________________________
 
     /**
      * @return bool
      */
     public function check()
     {
-        return $this->stack->first(function ($layer) {
-            return ! $this->passesLayer($layer);
-        }) === null;
-    }
-
-    /**
-     * @param array $layer
-     * @return bool
-     */
-    protected function passesLayer($layer)
-    {
-        foreach ($layer as $constraint)
-        {
-            if ($constraint->check($this->model)) {
-                return true;
-            }
-        }
-        return false;
+        return Stack::check($this->stack, $this->model);
     }
 
     /**
