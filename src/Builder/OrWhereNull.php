@@ -7,5 +7,4 @@ use Makeable\QueryKit\Contracts\QueryConstraint;
 
 class OrWhereNull extends WhereNull implements QueryConstraint, OrConstraint
 {
-
 }
