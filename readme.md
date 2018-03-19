@@ -102,26 +102,30 @@ $john = new Person(['name' => 'John']);
 $john->failsScope('nameIs', 'John'); // true
 ```
 
-## Current limitations
+## Currently supported methods
 
-As of this moment QueryKit only supports the following scope methods
+As of this moment QueryKit supports the following scope methods
 
+- OrWhere
+- OrWhereNotNull
+- OrWhereNull
 - Where (including the different operators)
 - WhereIn
 - WhereNotNull
 - WhereNull
 
-Furthermore some argument types such as closures and query builder may not be supported. 
-An exception will be thrown in that case.
+QueryKit tries to support most of the argument types that Eloquent Builder supports, but there might exceptions.
+
+Also, do note that advanced joins and relations queries won't work.
 
 ## Extending QueryKit
 
-Say that you want to add functionality for Laravel QueryBuilder's 'orWhere' method:
+Say that you want to add functionality for Laravel QueryBuilder's 'whereBetween' method:
 
-Create a **OrWhere** that implements **\Makeable\QueryKit\Contracts\QueryConstraint**.
+Create a **WhereBetween** that implements **\Makeable\QueryKit\Contracts\QueryConstraint**.
 
 ```php
-class OrWhere implements \Makeable\QueryKit\Contracts\QueryConstraint
+class WhereBetween implements \Makeable\QueryKit\Contracts\QueryConstraint
 {
     public function __construct(...$args)
     {
@@ -141,7 +145,7 @@ Next register the constraint in your AppServiceProvider's register method:
 ```php
 public function register()
 {
-    \Makeable\QueryKit\Builder\Builder::registerConstraint(OrWhere::class);
+    \Makeable\QueryKit\Builder\Builder::registerConstraint(WhereBetween::class);
 }
 ```
 
