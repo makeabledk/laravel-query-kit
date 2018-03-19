@@ -3,11 +3,9 @@
 namespace Makeable\QueryKit\Builder;
 
 use BadMethodCallException;
-use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use Makeable\QueryKit\Contracts\QueryConstraint;
 
 /**
  * QueryKit Builder.
@@ -131,5 +129,4 @@ class Builder
     {
         dd($this->stack);
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace Makeable\QueryKit\Builder;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Makeable\QueryKit\Contracts\OrConstraint;
 use Makeable\QueryKit\Contracts\QueryConstraint;
@@ -27,7 +26,7 @@ class Stack
      * @param $model
      * @return bool
      */
-    public static function check(Stack $stack, $model)
+    public static function check(self $stack, $model)
     {
         return $stack->tracks->first(function ($track) use ($model) {
             return static::passesTrack($track, $model);
@@ -55,6 +54,7 @@ class Stack
         if ($this->constraintImplements($constraint, OrConstraint::class)) {
             return $this->newTrack($constraint);
         }
+
         return $this->push($constraint);
     }
 

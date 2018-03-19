@@ -3,7 +3,6 @@
 namespace Makeable\QueryKit\Tests\Unit;
 
 use Makeable\QueryKit\Tests\TestCase;
-use Makeable\QueryKit\Tests\TestModel;
 
 class QueryScopesTest extends TestCase
 {
