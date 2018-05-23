@@ -8,6 +8,12 @@
 
 This package provides a handy way to query eloquent-scopes on model instances in Laravel.
 
+Traditionally you may find yourself having a `scopeAccepted` and then additionally a `ìsAccepted` helper method on your model. 
+
+With QueryKit, those days are long gone 🔥
+
+--
+
 Makeable is web- and mobile app agency located in Aarhus, Denmark.
 
 ## Installation
