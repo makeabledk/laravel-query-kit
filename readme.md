@@ -6,7 +6,7 @@
 [![Build Status](https://img.shields.io/travis/makeabledk/laravel-query-kit/master.svg?style=flat-square)](https://travis-ci.org/makeabledk/laravel-query-kit)
 [![StyleCI](https://styleci.io/repos/95551114/shield?branch=master)](https://styleci.io/repos/95551114)
 
-This package provides a handy way to work with query scopes on model instances in Laravel.
+This package provides a handy way to query eloquent-scopes on model instances in Laravel.
 
 Makeable is web- and mobile app agency located in Aarhus, Denmark.
 
@@ -29,39 +29,38 @@ For Laravel version prior 5.5: Add the service provider to your config/app.php:
 
 ## Usage
 
-Whenever you have a query scope on an Eloquent Model, you apply the following trait to add QueryKit:
+Whenever you have a query scope on an Eloquent Model, you can apply the following trait to add QueryKit:
 
 ```php
-class Model extends Eloquent {
-    use \Makeable\QueryKit\QueryKit;
-}
-```
-
-From then on whenever you have a Laravel scope, you use the checker functions on a single model instance:
-
-```php
-class Person extends Eloquent {
+class Job extends Eloquent {
     use \Makeable\QueryKit\QueryKit;
     
-    protected $fillable = ['name']; 
-    
-    public function scopeNameIs($query, $name)
+    public function scopeHired($query)
     {
-        return $query->where('name', $name);
+        return $query->whereIn('status', ['started', 'finished']);
     }
 }
 ```
+Out of the box Laravel offers us a convenient way to query against our database:
 
 ```php
-$john = new Person(['name' => 'John']);
+Job::hired()->first(); // a job with either 'started' or 'finished' status
+```
 
-$john->passesScope('nameIs', 'John'); // true
-$john->passesScope('nameIs', 'Doe'); // false
+But with query-kit you are now also able to check if a model instance passes a given scope:
+
+```php
+$startedJob->passesScope('hired'); // true
+$pendingJob->passesScope('hired'); // false
 ```
 
 Pretty cool, right?
 
-## Provided methods
+**Much more advanced functionality is supported than this simple example.**
+
+See **Currently supported methods** further down.
+
+## Provided methods on `QueryKit` 
 
 ### passesScope
 ```php
@@ -70,15 +69,9 @@ Pretty cool, right?
  * 
  * @param $name
  * @param array ...$args
- * @return mixed
+ * @return bool
  */
 public function passesScope($name, ...$args)
-```
-
-Example:
-```php
-$john = new Person(['name' => 'John']);
-$john->passesScope('nameIs', 'John'); // true
 ```
 
 ### failsScope
@@ -88,23 +81,14 @@ $john->passesScope('nameIs', 'John'); // true
  * 
  * @param $name
  * @param array ...$args
- * @return mixed
+ * @return bool
  */
 public function failsScope($name, ...$args)
-{
-    return ! $this->passesScope($name, ...$args);
-}
-```
-
-Example:
-```php
-$john = new Person(['name' => 'John']);
-$john->failsScope('nameIs', 'John'); // true
 ```
 
 ## Currently supported methods
 
-As of this moment QueryKit supports the following scope methods
+As of this moment QueryKit supports the following query methods
 
 - OrWhere
 - OrWhereNotNull
@@ -151,9 +135,9 @@ public function register()
 
 You can also use the above method to override the existing implementations.
 
-## Change log
+## Related packages
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Make sure to checkout our [makeabledk/laravel-eloquent-status](https://github.com/makeabledk/laravel-eloquent-status) package that streamlines the way you handle model-state across your application.
 
 ## Testing
 
