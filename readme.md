@@ -10,7 +10,7 @@ This package provides a handy way to query eloquent-scopes on model instances in
 
 Traditionally you may find yourself having a `scopeAccepted` and then additionally a `ìsAccepted` helper method on your model. 
 
-With QueryKit, those days are long gone 🔥
+Well, Bon Voyage code-duplication. QueryKit is here to the rescue! 🔥
 
 --
 
