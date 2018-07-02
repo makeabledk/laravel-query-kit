@@ -10,17 +10,17 @@ class Where implements QueryConstraint
     /**
      * @var mixed
      */
-    private $property;
+    protected $property;
 
     /**
      * @var mixed
      */
-    private $operator;
+    protected $operator;
 
     /**
      * @var mixed
      */
-    private $value;
+    protected $value;
 
     /**
      * Where constructor.
@@ -45,30 +45,30 @@ class Where implements QueryConstraint
 
         switch ($this->operator) {
             case '=':
-                return $model->{$this->property} === $this->value;
+                return $this->attribute($model) === $this->value();
             break;
             case '>=':
-                return $model->{$this->property} >= $this->value;
+                return $this->attribute($model) >= $this->value();
             break;
             case '<=':
-                return $model->{$this->property} <= $this->value;
+                return $this->attribute($model) <= $this->value();
             break;
             case '<>':
-                return $model->{$this->property} !== $this->value;
+                return $this->attribute($model) !== $this->value();
             break;
             case '>':
-                return $model->{$this->property} > $this->value;
+                return $this->attribute($model) > $this->value();
             break;
             case '<':
-                return $model->{$this->property} < $this->value;
+                return $this->attribute($model) < $this->value();
             break;
             case 'like':
-                $pattern = preg_quote($this->value);
+                $pattern = preg_quote($this->value());
                 $pattern = str_replace('%', '(.*?)', $pattern);
                 $pattern = str_replace('_', '(.)', $pattern);
                 $pattern = '/^'.$pattern.'$/s';
 
-                return preg_match($pattern, $model->{$this->property}) != false;
+                return preg_match($pattern, $this->attribute($model)) != false;
             break;
         }
         throw new BadMethodCallException('Operator not supported: '.$this->operator);
@@ -99,5 +99,23 @@ class Where implements QueryConstraint
         $operator = $operator === null ? null : strtolower($operator);
 
         return [$property, $operator, $value];
+    }
+
+
+    /**
+     * @param $model
+     * @return mixed
+     */
+    protected function attribute($model)
+    {
+        return $model->{$this->property};
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function value()
+    {
+        return $this->value;
     }
 }

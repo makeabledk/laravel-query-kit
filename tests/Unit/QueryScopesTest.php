@@ -42,11 +42,35 @@ class QueryScopesTest extends TestCase
         $this->assertFalse($person->passesScope('nameLike', '_John%'));
     }
 
+    public function test_where_sub_queries()
+    {
+        $this->create('Jane Doe');
+        $this->create('Jane Doe', 27);
+        $this->create('Janine Doe', 27);
+        $this->create('Janine Doe', 28);
+
+        $this->assertTrue($this->create('John')->passesScope(function ($query) {
+            $query->janeOrJohn()->where(function ($query) {
+                $query->age('>', 20)->orWhereNull('age');
+            });
+        }));
+    }
+
+    public function test_or_where()
+    {
+        $this->assertTrue($this->create('Jane Doe')->passesScope('janeOrJohn'));
+        $this->assertTrue($this->create('John Doe')->passesScope('janeOrJohn'));
+        $this->assertFalse($this->create('Janine Doe')->passesScope('janeOrJohn'));
+    }
+
     public function test_where_in()
     {
         $person = $this->create('John Doe', 27);
         $this->assertTrue($person->passesScope('nameIn', ['Jane Doe', 'John Doe']));
         $this->assertFalse($person->passesScope('nameIn', ['Jane Doe', 'John']));
+        $this->assertTrue($person->passesScope(function ($query) {
+            $query->whereIn('name', ['Jane'])->orWhereIn('name', ['John Doe']);
+        }));
     }
 
     public function test_where_null()
@@ -55,19 +79,23 @@ class QueryScopesTest extends TestCase
         $this->assertTrue($person->passesScope('noAge'));
     }
 
+    public function test_where_not_in()
+    {
+        $this->assertTrue($this->create('John')->passesScope(function ($query) {
+            $query->whereNotIn('name', ['Jane']);
+        }));
+        $this->assertTrue($this->create('John')->passesScope(function ($query) {
+            $query->whereNotIn('name', ['Jane'])
+                ->orWhereNotIn('name', ['John Doe']);;
+        }));
+    }
+
     public function test_where_not_null()
     {
         $jane = $this->create('Jane Doe', 27);
         $john = $this->create('John Doe', null);
         $this->assertTrue($jane->passesScope('hasAge'));
         $this->assertFalse($john->passesScope('hasAge'));
-    }
-
-    public function test_or_where()
-    {
-        $this->assertTrue($this->create('Jane Doe')->passesScope('janeOrJohn'));
-        $this->assertTrue($this->create('John Doe')->passesScope('janeOrJohn'));
-        $this->assertFalse($this->create('Janine Doe')->passesScope('janeOrJohn'));
     }
 
     public function test_or_where_null()
@@ -86,23 +114,87 @@ class QueryScopesTest extends TestCase
         $this->assertFalse($this->create(null, null)->passesScope('hasNameOrAge'));
     }
 
-    public function test_sub_queries()
+    public function test_where_date()
     {
-        $this->create('Jane Doe');
-        $this->create('Jane Doe', 27);
-        $this->create('Janine Doe', 27);
-        $this->create('Janine Doe', 28);
+        $john = $this->create('John');
 
-        $this->assertTrue($this->create('John')->passesScope(function ($query) {
-            $query->janeOrJohn()->where(function ($query) {
-                $query->age('>', 20)->orWhereNull('age');
-            });
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereDate('created_at', now()->toDateString());
         }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereDate('created_at', '<', now()->addDay()->toDateString());
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query
+                ->whereDate('created_at', now()->toDateString())
+                ->orWhereDate('created_at', now()->subDay()->toDateString());
+        }));
+    }
 
-//        $this->assertTrue($this->create('Janine')->passesScope(function ($query) {
-//            $query->janeOrJohn()->where(function ($query) {
-//                $query->age('>', 20)->orWhereNull('age');
-//            });
-//        }));
+    public function test_where_day()
+    {
+        $john = $this->create('John');
+
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereDay('created_at', now()->day);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereDay('created_at', (string) now()->subMonth()->day);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query
+                ->whereDay('created_at', now()->day)
+                ->orWhereDay('created_at', now()->subDay()->day);
+        }));
+    }
+
+    public function test_where_month()
+    {
+        $john = $this->create('John');
+
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereMonth('created_at', now()->month);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereMonth('created_at', (string) now()->month);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query
+                ->whereMonth('created_at', now()->month)
+                ->orWhereMonth('created_at', now()->subMonth()->month);
+        }));
+    }
+
+    public function test_where_time()
+    {
+        $john = $this->create('John');
+        $john->created_at = '2018-01-01 00:00:00';
+        $john->save();
+
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereTime('created_at', '00:00:00');
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query
+                ->whereTime('created_at', '00:00:01')
+                ->orWhereTime('created_at', '00:00:00');
+        }));
+    }
+
+    public function test_where_year()
+    {
+        $john = $this->create('John');
+
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereYear('created_at', now()->year);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereYear('created_at', (string) now()->year);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query
+                ->whereYear('created_at', now()->year)
+                ->orWhereYear('created_at', now()->subYear()->year);
+        }));
     }
 }

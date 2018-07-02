@@ -20,11 +20,6 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     protected $guarded = [];
 
     /**
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * @param Builder $query
      * @param $name
      * @return Builder

@@ -48,6 +48,7 @@ class TestCase extends Orchestra
             $table->increments('id');
             $table->string('name')->nullable();
             $table->integer('age')->nullable();
+            $table->timestamps();
         });
     }
 
