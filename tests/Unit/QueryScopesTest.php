@@ -86,7 +86,7 @@ class QueryScopesTest extends TestCase
         }));
         $this->assertTrue($this->create('John')->passesScope(function ($query) {
             $query->whereNotIn('name', ['Jane'])
-                ->orWhereNotIn('name', ['John Doe']);;
+                ->orWhereNotIn('name', ['John Doe']);
         }));
     }
 

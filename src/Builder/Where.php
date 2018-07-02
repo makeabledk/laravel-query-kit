@@ -101,7 +101,6 @@ class Where implements QueryConstraint
         return [$property, $operator, $value];
     }
 
-
     /**
      * @param $model
      * @return mixed
