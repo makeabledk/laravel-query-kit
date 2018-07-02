@@ -27,9 +27,6 @@ use Makeable\QueryKit\Builder\WhereYear;
 
 class QueryKitServiceProvider extends ServiceProvider
 {
-    /**
-     *
-     */
     public function register()
     {
         Builder::registerConstraint(OrWhere::class);
