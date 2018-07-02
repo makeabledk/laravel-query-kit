@@ -63,6 +63,37 @@ class QueryScopesTest extends TestCase
         $this->assertFalse($this->create('Janine Doe')->passesScope('janeOrJohn'));
     }
 
+    public function test_where_between()
+    {
+        $john = $this->create('John', 25);
+
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereBetween('age', [20, 25]);
+        }));
+        $this->assertFalse($john->passesScope(function ($query) {
+            $query->whereBetween('age', [19, 24]);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereBetween('age', [19, 24])->orWhereBetween('age', [25, 30]);
+        }));
+    }
+
+    public function test_where_not_between()
+    {
+        $john = $this->create('John', 25);
+
+        $this->assertFalse($john->passesScope(function ($query) {
+            $query->whereNotBetween('age', [20, 25]);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereNotBetween('age', [19, 24]);
+        }));
+        $this->assertTrue($john->passesScope(function ($query) {
+            $query->whereNotBetween('age', [19, 24])
+                ->orWhereNotBetween('age', [26, 30]);
+        }));
+    }
+
     public function test_where_in()
     {
         $person = $this->create('John Doe', 27);
