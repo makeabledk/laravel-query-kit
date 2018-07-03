@@ -47,11 +47,12 @@ class Stack
 
     /**
      * @param QueryConstraint $constraint
+     * @param bool $or
      * @return Stack
      */
-    public function apply(QueryConstraint $constraint)
+    public function apply(QueryConstraint $constraint, $or = false)
     {
-        if ($this->constraintImplements($constraint, OrConstraint::class)) {
+        if ($or) {
             return $this->newTrack($constraint);
         }
 

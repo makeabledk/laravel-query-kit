@@ -33,18 +33,6 @@ class QueryKitServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        Builder::registerConstraint(OrWhere::class);
-        Builder::registerConstraint(OrWhereBetween::class);
-        Builder::registerConstraint(OrWhereDate::class);
-        Builder::registerConstraint(OrWhereDay::class);
-        Builder::registerConstraint(OrWhereMonth::class);
-        Builder::registerConstraint(OrWhereIn::class);
-        Builder::registerConstraint(OrWhereNull::class);
-        Builder::registerConstraint(OrWhereNotBetween::class);
-        Builder::registerConstraint(OrWhereNotIn::class);
-        Builder::registerConstraint(OrWhereNotNull::class);
-        Builder::registerConstraint(OrWhereTime::class);
-        Builder::registerConstraint(OrWhereYear::class);
         Builder::registerConstraint(Where::class);
         Builder::registerConstraint(WhereBetween::class);
         Builder::registerConstraint(WhereDate::class);
