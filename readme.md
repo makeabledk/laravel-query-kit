@@ -104,8 +104,8 @@ As of this moment QueryKit supports the following query methods
 - orWhereMonth
 - orWhereNotBetween
 - orWhereNotIn
-- WhereNotNull
-- WhereNull
+- orWhereNotNull
+- orWhereNull
 - orWhereTime
 - orWhereYear
 - where
@@ -116,8 +116,8 @@ As of this moment QueryKit supports the following query methods
 - whereMonth
 - whereNotBetween
 - whereNotIn
-- WhereNotNull
-- WhereNull
+- whereNotNull
+- whereNull
 - whereTime
 - whereYear
 
