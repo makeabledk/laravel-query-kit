@@ -124,7 +124,7 @@ class Builder
      */
     public function check()
     {
-        return Stack::check($this->stack, $this->model);
+        return $this->stack->check($this->model);
     }
 
     /**
