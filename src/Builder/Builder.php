@@ -127,9 +127,12 @@ class Builder
         return $this->stack->check($this->model);
     }
 
-    public function getFactoryAttributes()
+    /**
+     * @return array
+     */
+    public function makeAttributes()
     {
-        $this->stack->makeAttributes($this->model);
+        return $this->stack->makeAttributes($this->model);
     }
 
     /**

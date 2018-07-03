@@ -8,7 +8,7 @@ class WhereTime extends Where
 {
     /**
      * @param $model
-     * @return Carbon
+     * @return int
      */
     protected function attribute($model)
     {

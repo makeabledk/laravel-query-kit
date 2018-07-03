@@ -88,7 +88,7 @@ class Stack
 
     /**
      * @param Model $model
-     * @return []
+     * @return array
      */
     public function makeAttributes($model)
     {
@@ -98,8 +98,8 @@ class Stack
 
         return $constraints
             ->reduce(function (ModelBuilder $builder, QueryConstraint $constraint) use ($model) {
-                $builder->mergeAttributes($constraint->make());
-            }, new ModelBuilder())
+                $builder->mergeAttributes($constraint->make($model));
+            }, new ModelBuilder($model))
             ->makeAttributes();
     }
 }

@@ -34,68 +34,6 @@ class Where implements QueryConstraint
     }
 
     /**
-     * @param $model
-     *
-     * @return bool
-     */
-    public function check($model)
-    {
-        if ($this->isSubQuery()) {
-            return Builder::make($model, $this->property)->check();
-        }
-
-        switch ($this->operator) {
-            case '=':
-                return $this->attribute($model) === $this->value();
-            break;
-            case '>=':
-                return $this->attribute($model) >= $this->value();
-            break;
-            case '<=':
-                return $this->attribute($model) <= $this->value();
-            break;
-            case '<>':
-                return $this->attribute($model) !== $this->value();
-            break;
-            case '>':
-                return $this->attribute($model) > $this->value();
-            break;
-            case '<':
-                return $this->attribute($model) < $this->value();
-            break;
-            case 'like':
-                $pattern = preg_quote($this->value());
-                $pattern = str_replace('%', '(.*?)', $pattern);
-                $pattern = str_replace('_', '(.)', $pattern);
-                $pattern = '/^'.$pattern.'$/s';
-
-                return preg_match($pattern, $this->attribute($model)) != false;
-            break;
-        }
-        throw new BadMethodCallException('Operator not supported: '.$this->operator);
-    }
-
-    /**
-     * @param $model
-     *
-     * @return ModelAttribute
-     */
-    public function make($model)
-    {
-        $attribute = new ModelAttribute();
-
-        return $attribute;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isSubQuery()
-    {
-        return $this->operator === null && is_callable($this->property);
-    }
-
-    /**
      * @param $property
      * @param $operator
      * @param null $value
@@ -116,6 +54,96 @@ class Where implements QueryConstraint
 
     /**
      * @param $model
+     *
+     * @return bool
+     */
+    public function check($model)
+    {
+        if ($this->isSubQuery()) {
+            return Builder::make($model, $this->property)->check();
+        }
+
+        switch ($this->operator) {
+            case '=':
+                return $this->attribute($model) === $this->value();
+
+            case '>=':
+                return $this->attribute($model) >= $this->value();
+
+            case '<=':
+                return $this->attribute($model) <= $this->value();
+
+            case '<>':
+                return $this->attribute($model) !== $this->value();
+
+            case '>':
+                return $this->attribute($model) > $this->value();
+
+            case '<':
+                return $this->attribute($model) < $this->value();
+
+            case 'like':
+                $pattern = preg_quote($this->value());
+                $pattern = str_replace('%', '(.*?)', $pattern);
+                $pattern = str_replace('_', '(.)', $pattern);
+                $pattern = '/^'.$pattern.'$/s';
+
+                return preg_match($pattern, $this->attribute($model)) != false;
+        }
+
+        $this->invalidOperator();
+    }
+
+    /**
+     * @param $model
+     *
+     * @return ModelAttribute|array
+     */
+    public function make($model)
+    {
+        if ($this->isSubQuery()) {
+            return Builder::make($model, $this->property)->makeAttributes();
+        }
+
+        $attribute = new ModelAttribute($this->property);
+
+        switch ($this->operator)
+        {
+            case '=':
+                return $attribute->like($this->value());
+
+            case '>=':
+                return $attribute->gte($this->value());
+
+            case '<=':
+                return $attribute->lte($this->value());
+
+            case '<>':
+                return $attribute->notIn($this->value());
+
+            case '>':
+                return $attribute->gt($this->value());
+
+            case '<':
+                return $attribute->lte($this->value());
+
+            case 'like':
+                return $attribute->like($this->value());
+        }
+
+        $this->invalidOperator();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isSubQuery()
+    {
+        return $this->operator === null && is_callable($this->property);
+    }
+
+    /**
+     * @param $model
      * @return mixed
      */
     protected function attribute($model)
@@ -129,5 +157,13 @@ class Where implements QueryConstraint
     protected function value()
     {
         return $this->value;
+    }
+
+    /**
+     * @throws BadMethodCallException
+     */
+    protected function invalidOperator()
+    {
+        throw new BadMethodCallException('Operator not supported: '.$this->operator);
     }
 }
