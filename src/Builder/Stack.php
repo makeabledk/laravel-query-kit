@@ -2,8 +2,10 @@
 
 namespace Makeable\QueryKit\Builder;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Makeable\QueryKit\Contracts\QueryConstraint;
+use Makeable\QueryKit\Factory\ModelBuilder;
 
 class Stack
 {
@@ -82,5 +84,22 @@ class Stack
         return $track->first(function (QueryConstraint $constraint) use ($model) {
             return ! $constraint->check($model);
         }) === null;
+    }
+
+    /**
+     * @param Model $model
+     * @return []
+     */
+    public function makeAttributes($model)
+    {
+        if (! $constraints = $this->tracks->random()) {
+            return [];
+        }
+
+        return $constraints
+            ->reduce(function (ModelBuilder $builder, QueryConstraint $constraint) use ($model) {
+                $builder->mergeAttributes($constraint->make());
+            }, new ModelBuilder())
+            ->makeAttributes();
     }
 }

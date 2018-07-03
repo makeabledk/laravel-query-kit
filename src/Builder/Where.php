@@ -4,6 +4,7 @@ namespace Makeable\QueryKit\Builder;
 
 use BadMethodCallException;
 use Makeable\QueryKit\Contracts\QueryConstraint;
+use Makeable\QueryKit\Factory\ModelAttribute;
 
 class Where implements QueryConstraint
 {
@@ -72,6 +73,18 @@ class Where implements QueryConstraint
             break;
         }
         throw new BadMethodCallException('Operator not supported: '.$this->operator);
+    }
+
+    /**
+     * @param $model
+     *
+     * @return ModelAttribute
+     */
+    public function make($model)
+    {
+        $attribute = new ModelAttribute();
+
+        return $attribute;
     }
 
     /**

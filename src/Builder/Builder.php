@@ -127,6 +127,11 @@ class Builder
         return $this->stack->check($this->model);
     }
 
+    public function getFactoryAttributes()
+    {
+        $this->stack->makeAttributes($this->model);
+    }
+
     /**
      * Debug stack.
      */
