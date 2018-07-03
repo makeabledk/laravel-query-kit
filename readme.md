@@ -96,13 +96,30 @@ public function failsScope($name, ...$args)
 
 As of this moment QueryKit supports the following query methods
 
-- OrWhere
-- OrWhereNotNull
-- OrWhereNull
-- Where (including the different operators)
-- WhereIn
+- orWhere
+- orWhereIn
+- orWhereBetween
+- orWhereDate
+- orWhereDay
+- orWhereMonth
+- orWhereNotBetween
+- orWhereNotIn
 - WhereNotNull
 - WhereNull
+- orWhereTime
+- orWhereYear
+- where
+- whereIn
+- whereBetween
+- whereDate
+- whereDay
+- whereMonth
+- whereNotBetween
+- whereNotIn
+- WhereNotNull
+- WhereNull
+- whereTime
+- whereYear
 
 QueryKit tries to support most of the argument types that Eloquent Builder supports, but there might exceptions.
 
