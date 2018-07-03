@@ -52,9 +52,14 @@ class Builder
      */
     public function __call($method, $parameters)
     {
+        // Convert ie. orWhere -> where
+        if ($or = substr($method, 0, 2) === 'or') {
+            $method = camel_case(substr($method, 2));
+        }
+
         // Check macros for registered Query Constraint
         if (static::hasMacro($method)) {
-            $this->stack->apply(call_user_func_array(static::$macros[$method], $parameters));
+            $this->stack->apply(call_user_func_array(static::$macros[$method], $parameters), $or);
 
             return $this;
         }
@@ -88,7 +93,7 @@ class Builder
      */
     public static function registerConstraint($class)
     {
-        static::macro(Str::camel(class_basename($class)), function (...$parameters) use ($class) {
+        static::macro(camel_case(class_basename($class)), function (...$parameters) use ($class) {
             return new $class(...$parameters);
         });
     }
