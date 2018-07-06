@@ -53,6 +53,19 @@ trait DescribesDateAttributes
     }
 
     /**
+     * @return bool
+     */
+    public function hasDateConstraints()
+    {
+        foreach([$this->day, $this->date, $this->month, $this->time, $this->year] as $constraint) {
+            if ($constraint !== null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @param int $month
      * @return $this
      */

@@ -1,10 +1,10 @@
 <?php
 
-namespace Makeable\QueryKit\Builder;
+namespace Makeable\QueryKit;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Makeable\QueryKit\Contracts\QueryConstraint;
+use Makeable\QueryKit\Constraints\ConstraintContract;
 use Makeable\QueryKit\Factory\ModelBuilder;
 
 class Stack
@@ -23,11 +23,11 @@ class Stack
     }
 
     /**
-     * @param QueryConstraint $constraint
+     * @param ConstraintContract $constraint
      * @param bool $or
      * @return Stack
      */
-    public function apply(QueryConstraint $constraint, $or = false)
+    public function apply(ConstraintContract $constraint, $or = false)
     {
         if ($or) {
             return $this->newTrack($constraint);
@@ -81,7 +81,7 @@ class Stack
      */
     protected function passesTrack($track, $model)
     {
-        return $track->first(function (QueryConstraint $constraint) use ($model) {
+        return $track->first(function (ConstraintContract $constraint) use ($model) {
             return ! $constraint->check($model);
         }) === null;
     }
@@ -97,7 +97,7 @@ class Stack
         }
 
         return $constraints
-            ->reduce(function (ModelBuilder $builder, QueryConstraint $constraint) use ($model) {
+            ->reduce(function (ModelBuilder $builder, ConstraintContract $constraint) use ($model) {
                 $builder->mergeAttributes($constraint->make($model));
             }, new ModelBuilder($model))
             ->makeAttributes();

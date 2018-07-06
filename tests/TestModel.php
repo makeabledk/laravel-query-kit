@@ -2,7 +2,7 @@
 
 namespace Makeable\QueryKit\Tests;
 
-use Makeable\QueryKit\Builder\Builder;
+use Makeable\QueryKit\Builder;
 use Makeable\QueryKit\QueryKit;
 
 class TestModel extends \Illuminate\Database\Eloquent\Model

@@ -1,10 +1,10 @@
 <?php
 
-namespace Makeable\QueryKit\Builder;
+namespace Makeable\QueryKit\Constraints;
 
-use Makeable\QueryKit\Contracts\QueryConstraint;
+use Makeable\QueryKit\Constraints\ConstraintContract;
 
-class WhereBetween implements QueryConstraint
+class WhereBetween implements ConstraintContract
 {
     /**
      * @var mixed

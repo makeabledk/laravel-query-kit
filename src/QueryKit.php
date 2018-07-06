@@ -2,8 +2,6 @@
 
 namespace Makeable\QueryKit;
 
-use Makeable\QueryKit\Builder\Builder;
-
 trait QueryKit
 {
     /**

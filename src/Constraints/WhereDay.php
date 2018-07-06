@@ -1,10 +1,10 @@
 <?php
 
-namespace Makeable\QueryKit\Builder;
+namespace Makeable\QueryKit\Constraints;
 
 use Carbon\Carbon;
 
-class WhereMonth extends Where
+class WhereDay extends Where
 {
     /**
      * @param $model
@@ -15,7 +15,7 @@ class WhereMonth extends Where
         $attribute = $model->{$this->property};
         $attribute = $attribute instanceof Carbon ? $attribute : Carbon::parse($model);
 
-        return $attribute->month;
+        return $attribute->day;
     }
 
     /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace Makeable\QueryKit\Builder;
+namespace Makeable\QueryKit\Constraints;
 
-use Makeable\QueryKit\Contracts\QueryConstraint;
+use Makeable\QueryKit\Constraints\ConstraintContract;
 
-class WhereNotNull implements QueryConstraint
+class WhereNull implements ConstraintContract
 {
     /**
      * @var mixed
@@ -28,6 +28,6 @@ class WhereNotNull implements QueryConstraint
      */
     public function check($model)
     {
-        return $model->{$this->property} !== null;
+        return $model->{$this->property} === null;
     }
 }

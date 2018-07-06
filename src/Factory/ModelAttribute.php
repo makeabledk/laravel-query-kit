@@ -2,6 +2,15 @@
 
 namespace Makeable\QueryKit\Factory;
 
+use Carbon\Carbon;
+use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Makeable\QueryKit\Constraints\LikeInterpreter;
+use Makeable\QueryKit\Factory\Generators\AttributeReflection;
+use Makeable\QueryKit\Factory\Generators\DateGenerator;
+use Makeable\QueryKit\Factory\Generators\NumberGenerator;
+use Makeable\QueryKit\Factory\Generators\StringGenerator;
+
 class ModelAttribute
 {
     use DescribesAttributes;
@@ -12,11 +21,26 @@ class ModelAttribute
     protected $name;
 
     /**
-     * @param $name
+     * @var Model
      */
-    public function __construct($name)
+    protected $model;
+
+    /**
+     * @param $name
+     * @param Model $model
+     */
+    public function __construct($name, $model)
     {
         $this->name = $name;
+        $this->model = $model;
+    }
+
+    /**
+     * @return Model
+     */
+    public function getModel()
+    {
+        return $this->model;
     }
 
     /**
@@ -27,15 +51,100 @@ class ModelAttribute
         return $this->name;
     }
 
+    /**
+     * @return mixed
+     * @throws UnreachableValueException
+     */
     public function make()
     {
-        if (count($in = $this->in) && count($this->notIn)) {
-            if (count($in = array_intersect($in, $this->notIn)) === 0) {
-                throw new UnreachableValueException("{$this->getName()}");
+        if (count($this->in) || count($this->likes)) {
+            return $this->getMatchFromPool();
+        }
+
+        return $this->createMatchFromConstraints();
+    }
+
+    /**
+     * @return mixed
+     * @throws UnreachableValueException
+     */
+    protected function getMatchFromPool()
+    {
+        // Loop through in's and select a random value that's passing constraints
+        if (count($this->in)) {
+            if (count($matches = array_filter($this->in, [$this, 'valuePassesConstraints']))) {
+                return array_random($matches);
+            }
+
+            throw new UnreachableValueException("Could not find acceptable value for '{$this->getName()}' - hint: 'whereIn' expression");
+        }
+
+        // Try to convert likes to values
+        $likes = array_map(function ($expression) {
+            return str_replace('_', str_random(1), str_replace('%', '', $expression));
+        }, $this->likes);
+
+        if (count($matches = array_filter($likes, [$this, 'valuePassesConstraints']))) {
+            return array_random($matches);
+        }
+
+        throw new UnreachableValueException("Could not construct acceptable value for '{$this->getName()}' - hint: 'where like' or 'where equal' expression");
+    }
+
+    /**
+     * @return mixed
+     * @throws UnreachableValueException
+     */
+    protected function createMatchFromConstraints()
+    {
+        try {
+            return (new AttributeReflection($this))->generator()->make();
+        }
+        catch (UnreachableValueException $e) {
+            if ($this->valuePassesConstraints(null)) {
+                return null;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * @param $value
+     * @return bool
+     */
+    protected function valuePassesConstraints($value)
+    {
+        if ($this->gt !== null && $this->gt >= $value) {
+            return false;
+        }
+
+        if ($this->gte !== null && $this->gte > $value) {
+            return false;
+        }
+
+        if ($this->lt !== null && $this->lt <= $value) {
+            return false;
+        }
+
+        if ($this->lte !== null && $this->lte < $value) {
+            return false;
+        }
+
+        if (count($this->in) && ! in_array($value, $this->in)) {
+            return false;
+        }
+
+        if (count($this->notIn) && in_array($value, $this->notIn)) {
+            return false;
+        }
+
+        foreach ($this->likes as $expression) {
+            if (! (new LikeInterpreter())->check($value, $expression)) {
+                return false;
             }
         }
 
-
+        return true;
     }
 
     /**

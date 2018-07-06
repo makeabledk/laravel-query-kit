@@ -3,31 +3,31 @@
 namespace Makeable\QueryKit;
 
 use Illuminate\Support\ServiceProvider;
-use Makeable\QueryKit\Builder\Builder;
-use Makeable\QueryKit\Builder\OrWhere;
-use Makeable\QueryKit\Builder\OrWhereBetween;
-use Makeable\QueryKit\Builder\OrWhereDate;
-use Makeable\QueryKit\Builder\OrWhereDay;
-use Makeable\QueryKit\Builder\OrWhereIn;
-use Makeable\QueryKit\Builder\OrWhereMonth;
-use Makeable\QueryKit\Builder\OrWhereNotBetween;
-use Makeable\QueryKit\Builder\OrWhereNotIn;
-use Makeable\QueryKit\Builder\OrWhereNotNull;
-use Makeable\QueryKit\Builder\OrWhereNull;
-use Makeable\QueryKit\Builder\OrWhereTime;
-use Makeable\QueryKit\Builder\OrWhereYear;
-use Makeable\QueryKit\Builder\Where;
-use Makeable\QueryKit\Builder\WhereBetween;
-use Makeable\QueryKit\Builder\WhereDate;
-use Makeable\QueryKit\Builder\WhereDay;
-use Makeable\QueryKit\Builder\WhereIn;
-use Makeable\QueryKit\Builder\WhereMonth;
-use Makeable\QueryKit\Builder\WhereNotBetween;
-use Makeable\QueryKit\Builder\WhereNotIn;
-use Makeable\QueryKit\Builder\WhereNotNull;
-use Makeable\QueryKit\Builder\WhereNull;
-use Makeable\QueryKit\Builder\WhereTime;
-use Makeable\QueryKit\Builder\WhereYear;
+use Makeable\QueryKit\Constraints;
+use Makeable\QueryKit\Constraints\OrWhere;
+use Makeable\QueryKit\Constraints\OrWhereBetween;
+use Makeable\QueryKit\Constraints\OrWhereDate;
+use Makeable\QueryKit\Constraints\OrWhereDay;
+use Makeable\QueryKit\Constraints\OrWhereIn;
+use Makeable\QueryKit\Constraints\OrWhereMonth;
+use Makeable\QueryKit\Constraints\OrWhereNotBetween;
+use Makeable\QueryKit\Constraints\OrWhereNotIn;
+use Makeable\QueryKit\Constraints\OrWhereNotNull;
+use Makeable\QueryKit\Constraints\OrWhereNull;
+use Makeable\QueryKit\Constraints\OrWhereTime;
+use Makeable\QueryKit\Constraints\OrWhereYear;
+use Makeable\QueryKit\Constraints\Where;
+use Makeable\QueryKit\Constraints\WhereBetween;
+use Makeable\QueryKit\Constraints\WhereDate;
+use Makeable\QueryKit\Constraints\WhereDay;
+use Makeable\QueryKit\Constraints\WhereIn;
+use Makeable\QueryKit\Constraints\WhereMonth;
+use Makeable\QueryKit\Constraints\WhereNotBetween;
+use Makeable\QueryKit\Constraints\WhereNotIn;
+use Makeable\QueryKit\Constraints\WhereNotNull;
+use Makeable\QueryKit\Constraints\WhereNull;
+use Makeable\QueryKit\Constraints\WhereTime;
+use Makeable\QueryKit\Constraints\WhereYear;
 
 class QueryKitServiceProvider extends ServiceProvider
 {

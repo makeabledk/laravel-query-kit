@@ -1,12 +1,14 @@
 <?php
 
-namespace Makeable\QueryKit\Builder;
+namespace Makeable\QueryKit\Constraints;
 
 use BadMethodCallException;
-use Makeable\QueryKit\Contracts\QueryConstraint;
+use Makeable\QueryKit\Builder;
+use Makeable\QueryKit\Constraints;
+use Makeable\QueryKit\Constraints\ConstraintContract;
 use Makeable\QueryKit\Factory\ModelAttribute;
 
-class Where implements QueryConstraint
+class Where implements ConstraintContract
 {
     /**
      * @var mixed
@@ -83,12 +85,7 @@ class Where implements QueryConstraint
                 return $this->attribute($model) < $this->value();
 
             case 'like':
-                $pattern = preg_quote($this->value());
-                $pattern = str_replace('%', '(.*?)', $pattern);
-                $pattern = str_replace('_', '(.)', $pattern);
-                $pattern = '/^'.$pattern.'$/s';
-
-                return preg_match($pattern, $this->attribute($model)) != false;
+                return (new LikeInterpreter())->check($this->attribute($model), $this->value());
         }
 
         $this->invalidOperator();

@@ -1,21 +1,21 @@
 <?php
 
-namespace Makeable\QueryKit\Builder;
+namespace Makeable\QueryKit\Constraints;
 
 use Carbon\Carbon;
 
-class WhereDay extends Where
+class WhereYear extends Where
 {
     /**
      * @param $model
-     * @return Carbon
+     * @return int
      */
     protected function attribute($model)
     {
         $attribute = $model->{$this->property};
         $attribute = $attribute instanceof Carbon ? $attribute : Carbon::parse($model);
 
-        return $attribute->day;
+        return $attribute->year;
     }
 
     /**

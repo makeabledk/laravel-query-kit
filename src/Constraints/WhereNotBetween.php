@@ -1,8 +1,8 @@
 <?php
 
-namespace Makeable\QueryKit\Builder;
+namespace Makeable\QueryKit\Constraints;
 
-class WhereNotIn extends WhereIn
+class WhereNotBetween extends WhereBetween
 {
     /**
      * @param $model

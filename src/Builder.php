@@ -1,11 +1,12 @@
 <?php
 
-namespace Makeable\QueryKit\Builder;
+namespace Makeable\QueryKit;
 
 use BadMethodCallException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
+use Makeable\QueryKit\Stack;
 
 /**
  * QueryKit Builder.

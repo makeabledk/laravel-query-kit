@@ -1,8 +1,8 @@
 <?php
 
-namespace Makeable\QueryKit\Contracts;
+namespace Makeable\QueryKit\Constraints;
 
-interface QueryConstraint
+interface ConstraintContract
 {
     /**
      * @param $model
