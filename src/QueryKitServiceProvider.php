@@ -3,19 +3,6 @@
 namespace Makeable\QueryKit;
 
 use Illuminate\Support\ServiceProvider;
-use Makeable\QueryKit\Constraints;
-use Makeable\QueryKit\Constraints\OrWhere;
-use Makeable\QueryKit\Constraints\OrWhereBetween;
-use Makeable\QueryKit\Constraints\OrWhereDate;
-use Makeable\QueryKit\Constraints\OrWhereDay;
-use Makeable\QueryKit\Constraints\OrWhereIn;
-use Makeable\QueryKit\Constraints\OrWhereMonth;
-use Makeable\QueryKit\Constraints\OrWhereNotBetween;
-use Makeable\QueryKit\Constraints\OrWhereNotIn;
-use Makeable\QueryKit\Constraints\OrWhereNotNull;
-use Makeable\QueryKit\Constraints\OrWhereNull;
-use Makeable\QueryKit\Constraints\OrWhereTime;
-use Makeable\QueryKit\Constraints\OrWhereYear;
 use Makeable\QueryKit\Constraints\Where;
 use Makeable\QueryKit\Constraints\WhereBetween;
 use Makeable\QueryKit\Constraints\WhereDate;
