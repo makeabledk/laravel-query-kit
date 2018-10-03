@@ -26,10 +26,8 @@ class ModelBuilder
         $this->attributes = [];
     }
 
-
     public function makeAttributes()
     {
-
     }
 
     /**
@@ -38,8 +36,7 @@ class ModelBuilder
      */
     public function mergeAttributes($attributes)
     {
-        foreach (Arr::wrap($attributes) as $attribute)
-        {
+        foreach (Arr::wrap($attributes) as $attribute) {
             isset($this->attributes[$attribute->getName()])
                 ? $this->attributes[$attribute->getName()]->merge($attribute)
                 : $this->attributes[$attribute->getName()] = $attribute;

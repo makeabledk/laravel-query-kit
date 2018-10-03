@@ -69,8 +69,8 @@ class AttributeReflection
             $value = array_get(factory(get_class($this->model))->make(), $this->name);
 
             // TODO ...
+        } catch (Exception $e) {
         }
-        catch (Exception $e) {}
     }
 
     /**
@@ -98,9 +98,10 @@ class AttributeReflection
 
         try {
             Carbon::parse($value);
+
             return new DateGenerator();
+        } catch (Exception $e) {
         }
-        catch (Exception $e) {}
 
         if (is_string($value)) {
             return new StringGenerator();

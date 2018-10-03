@@ -4,8 +4,6 @@ namespace Makeable\QueryKit\Constraints;
 
 use BadMethodCallException;
 use Makeable\QueryKit\Builder;
-use Makeable\QueryKit\Constraints;
-use Makeable\QueryKit\Constraints\ConstraintContract;
 use Makeable\QueryKit\Factory\ModelAttribute;
 
 class Where implements ConstraintContract
@@ -104,8 +102,7 @@ class Where implements ConstraintContract
 
         $attribute = new ModelAttribute($this->property);
 
-        switch ($this->operator)
-        {
+        switch ($this->operator) {
             case '=':
                 return $attribute->like($this->value());
 

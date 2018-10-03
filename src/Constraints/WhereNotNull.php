@@ -2,8 +2,6 @@
 
 namespace Makeable\QueryKit\Constraints;
 
-use Makeable\QueryKit\Constraints\ConstraintContract;
-
 class WhereNotNull implements ConstraintContract
 {
     /**

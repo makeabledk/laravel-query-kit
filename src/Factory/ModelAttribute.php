@@ -2,14 +2,9 @@
 
 namespace Makeable\QueryKit\Factory;
 
-use Carbon\Carbon;
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Makeable\QueryKit\Constraints\LikeInterpreter;
 use Makeable\QueryKit\Factory\Generators\AttributeReflection;
-use Makeable\QueryKit\Factory\Generators\DateGenerator;
-use Makeable\QueryKit\Factory\Generators\NumberGenerator;
-use Makeable\QueryKit\Factory\Generators\StringGenerator;
 
 class ModelAttribute
 {
@@ -99,10 +94,9 @@ class ModelAttribute
     {
         try {
             return (new AttributeReflection($this))->generator()->make();
-        }
-        catch (UnreachableValueException $e) {
+        } catch (UnreachableValueException $e) {
             if ($this->valuePassesConstraints(null)) {
-                return null;
+                return;
             }
             throw $e;
         }
@@ -151,7 +145,7 @@ class ModelAttribute
      * @param ModelAttribute $attribute
      * @return ModelAttribute
      */
-    public function merge(ModelAttribute $attribute)
+    public function merge(self $attribute)
     {
         return $this
             ->gte($attribute->gte)
