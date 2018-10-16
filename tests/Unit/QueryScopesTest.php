@@ -228,4 +228,71 @@ class QueryScopesTest extends TestCase
                 ->orWhereYear('created_at', now()->subYear()->year);
         }));
     }
+
+    public function test_where_column()
+    {
+        $jhon = $this->create('Jhon',18);
+        $jhon->countryMajorityAge = 18;
+        $this->assertTrue($jhon->passesScope(function ($query) {
+            $query->whereColumn('age', '=','countryMajorityAge');
+        }));
+        $this->assertFalse($jhon->passesScope(function ($query) {
+            $query->whereColumn('age', '>','countryMajorityAge');
+        }));
+        $this->assertFalse($jhon->passesScope(function ($query) {
+            $query->whereColumn('age', '<','countryMajorityAge');
+        }));
+        $this->assertTrue($jhon->passesScope(function ($query) {
+            $query->whereColumn('age', '>=','countryMajorityAge');
+        }));
+        $this->assertTrue($jhon->passesScope(function ($query) {
+            $query->whereColumn('age', '<=','countryMajorityAge');
+        }));
+        $this->assertFalse($jhon->passesScope(function ($query) {
+            $query->whereColumn('age', '<>','countryMajorityAge');
+        }));
+
+        $adam = $this->create('Adam',27);
+        $adam->countryMajorityAge = 18;
+        $this->assertFalse($adam->passesScope(function ($query) {
+            $query->whereColumn('age', '=','countryMajorityAge');
+        }));
+        $this->assertTrue($adam->passesScope(function ($query) {
+            $query->whereColumn('age', '>','countryMajorityAge');
+        }));
+        $this->assertFalse($adam->passesScope(function ($query) {
+            $query->whereColumn('age', '<','countryMajorityAge');
+        }));
+        $this->assertTrue($adam->passesScope(function ($query) {
+            $query->whereColumn('age', '>=','countryMajorityAge');
+        }));
+        $this->assertFalse($adam->passesScope(function ($query) {
+            $query->whereColumn('age', '<=','countryMajorityAge');
+        }));
+        $this->assertTrue($adam->passesScope(function ($query) {
+            $query->whereColumn('age', '<>','countryMajorityAge');
+        }));
+
+        $mary = $this->create('Mary',18);
+        $mary->countryMajorityAge = 21;
+        $this->assertFalse($mary->passesScope(function ($query) {
+            $query->whereColumn('age', '=','countryMajorityAge');
+        }));
+        $this->assertFalse($mary->passesScope(function ($query) {
+            $query->whereColumn('age', '>','countryMajorityAge');
+        }));
+        $this->assertTrue($mary->passesScope(function ($query) {
+            $query->whereColumn('age', '<','countryMajorityAge');
+        }));
+        $this->assertFalse($mary->passesScope(function ($query) {
+            $query->whereColumn('age', '>=','countryMajorityAge');
+        }));
+        $this->assertTrue($mary->passesScope(function ($query) {
+            $query->whereColumn('age', '<=','countryMajorityAge');
+        }));
+        $this->assertTrue($mary->passesScope(function ($query) {
+            $query->whereColumn('age', '<>','countryMajorityAge');
+        }));
+
+    }
 }

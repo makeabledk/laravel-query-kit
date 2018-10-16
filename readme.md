@@ -120,6 +120,7 @@ As of this moment QueryKit supports the following query methods
 - whereNull
 - whereTime
 - whereYear
+- whereColumn
 
 QueryKit tries to support most of the argument types that Eloquent Builder supports, but there might exceptions.
 
