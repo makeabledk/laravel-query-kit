@@ -18,6 +18,7 @@ use Makeable\QueryKit\Builder\OrWhereTime;
 use Makeable\QueryKit\Builder\OrWhereYear;
 use Makeable\QueryKit\Builder\Where;
 use Makeable\QueryKit\Builder\WhereBetween;
+use Makeable\QueryKit\Builder\WhereColumn;
 use Makeable\QueryKit\Builder\WhereDate;
 use Makeable\QueryKit\Builder\WhereDay;
 use Makeable\QueryKit\Builder\WhereIn;
@@ -57,5 +58,6 @@ class QueryKitServiceProvider extends ServiceProvider
         Builder::registerConstraint(WhereNotNull::class);
         Builder::registerConstraint(WhereTime::class);
         Builder::registerConstraint(WhereYear::class);
+        Builder::registerConstraint(WhereColumn::class);
     }
 }
