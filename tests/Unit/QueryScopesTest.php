@@ -253,7 +253,7 @@ class QueryScopesTest extends TestCase
             $query->whereColumn('age', '<>', 'countryMajorityAge');
         }));
 
-        $adam = $this->create('Adam',27);
+        $adam = $this->create('Adam', 27);
         $adam->countryMajorityAge = 18;
 
         $this->assertFalse($adam->passesScope(function ($query) {

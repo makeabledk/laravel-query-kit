@@ -18,6 +18,7 @@ use Makeable\QueryKit\Builder\OrWhereTime;
 use Makeable\QueryKit\Builder\OrWhereYear;
 use Makeable\QueryKit\Builder\Where;
 use Makeable\QueryKit\Builder\WhereBetween;
+use Makeable\QueryKit\Builder\WhereColumn;
 use Makeable\QueryKit\Builder\WhereDate;
 use Makeable\QueryKit\Builder\WhereDay;
 use Makeable\QueryKit\Builder\WhereIn;
@@ -28,7 +29,6 @@ use Makeable\QueryKit\Builder\WhereNotNull;
 use Makeable\QueryKit\Builder\WhereNull;
 use Makeable\QueryKit\Builder\WhereTime;
 use Makeable\QueryKit\Builder\WhereYear;
-use Makeable\QueryKit\Builder\WhereColumn;
 
 class QueryKitServiceProvider extends ServiceProvider
 {
