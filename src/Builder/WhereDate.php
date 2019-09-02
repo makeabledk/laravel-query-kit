@@ -13,7 +13,7 @@ class WhereDate extends Where
     protected function attribute($model)
     {
         $attribute = $model->{$this->property};
-        $attribute = $attribute instanceof Carbon ? $attribute : Carbon::parse($model);
+        $attribute = $attribute instanceof Carbon ? $attribute : Carbon::parse($attribute);
 
         return $attribute->toDateString();
     }
