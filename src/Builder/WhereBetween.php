@@ -38,7 +38,7 @@ class WhereBetween implements QueryConstraint
      */
     public function check($model)
     {
-        list($min, $max) = $this->range;
+        [$min, $max] = $this->range;
 
         return $model->{$this->property} >= $min && $model->{$this->property} <= $max;
     }
