@@ -7,11 +7,11 @@
         }
     },
     "require": {
-        "php": ">=7.0.0",
-        "illuminate/support": "^5.4"
+        "php": ">=7.1.0",
+        "illuminate/support": "^5.4|^6.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.5",
+        "orchestra/testbench": "~3.5|^4.0",
         "friendsofphp/php-cs-fixer": "^2.3"
     },
     "autoload-dev": {
