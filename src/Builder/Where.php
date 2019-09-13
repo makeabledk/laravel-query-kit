@@ -29,7 +29,7 @@ class Where implements QueryConstraint
      */
     public function __construct(...$args)
     {
-        list($this->property, $this->operator, $this->value) = $this->normalize(...$args);
+        [$this->property, $this->operator, $this->value] = $this->normalize(...$args);
     }
 
     /**
