@@ -54,7 +54,7 @@ class Builder
     {
         // Convert ie. orWhere -> where
         if ($or = substr($method, 0, 2) === 'or') {
-            $method = camel_case(substr($method, 2));
+            $method = Str::camel(substr($method, 2));
         }
 
         // Check macros for registered Query Constraint
@@ -93,7 +93,7 @@ class Builder
      */
     public static function registerConstraint($class)
     {
-        static::macro(camel_case(class_basename($class)), function (...$parameters) use ($class) {
+        static::macro(Str::camel(class_basename($class)), function (...$parameters) use ($class) {
             return new $class(...$parameters);
         });
     }
