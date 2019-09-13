@@ -4,18 +4,6 @@ namespace Makeable\QueryKit;
 
 use Illuminate\Support\ServiceProvider;
 use Makeable\QueryKit\Builder\Builder;
-use Makeable\QueryKit\Builder\OrWhere;
-use Makeable\QueryKit\Builder\OrWhereBetween;
-use Makeable\QueryKit\Builder\OrWhereDate;
-use Makeable\QueryKit\Builder\OrWhereDay;
-use Makeable\QueryKit\Builder\OrWhereIn;
-use Makeable\QueryKit\Builder\OrWhereMonth;
-use Makeable\QueryKit\Builder\OrWhereNotBetween;
-use Makeable\QueryKit\Builder\OrWhereNotIn;
-use Makeable\QueryKit\Builder\OrWhereNotNull;
-use Makeable\QueryKit\Builder\OrWhereNull;
-use Makeable\QueryKit\Builder\OrWhereTime;
-use Makeable\QueryKit\Builder\OrWhereYear;
 use Makeable\QueryKit\Builder\Where;
 use Makeable\QueryKit\Builder\WhereBetween;
 use Makeable\QueryKit\Builder\WhereColumn;
