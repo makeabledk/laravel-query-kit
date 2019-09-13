@@ -52,9 +52,14 @@ class Builder
      */
     public function __call($method, $parameters)
     {
+        // Convert ie. orWhere -> where
+        if ($or = substr($method, 0, 2) === 'or') {
+            $method = Str::camel(substr($method, 2));
+        }
+
         // Check macros for registered Query Constraint
         if (static::hasMacro($method)) {
-            $this->stack->apply(call_user_func_array(static::$macros[$method], $parameters));
+            $this->stack->apply(call_user_func_array(static::$macros[$method], $parameters), $or);
 
             return $this;
         }
@@ -119,7 +124,7 @@ class Builder
      */
     public function check()
     {
-        return Stack::check($this->stack, $this->model);
+        return $this->stack->check($this->model);
     }
 
     /**
