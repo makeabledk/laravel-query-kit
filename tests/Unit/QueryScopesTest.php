@@ -40,6 +40,11 @@ class QueryScopesTest extends TestCase
         $this->assertTrue($person->passesScope('nameLike', '%Doe'));
         $this->assertFalse($person->passesScope('nameLike', 'John'));
         $this->assertFalse($person->passesScope('nameLike', '_John%'));
+        $this->assertFalse($person->passesScope('nameLike', '_John%'));
+        $this->assertTrue($person->passesScope('nameLike', 'john doe')); // case insensitive
+
+        $person = $this->create("John \n Doe");
+        $this->assertTrue($person->passesScope('nameLike', 'John%Doe')); // % allows linebreaks
     }
 
     public function test_where_sub_queries()

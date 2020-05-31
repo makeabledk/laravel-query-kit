@@ -66,7 +66,7 @@ class Where implements QueryConstraint
                 $pattern = preg_quote($this->value());
                 $pattern = str_replace('%', '(.*?)', $pattern);
                 $pattern = str_replace('_', '(.)', $pattern);
-                $pattern = '/^'.$pattern.'$/s';
+                $pattern = '/^'.$pattern.'$/si'; // allow linebreaks and case insensitive matches
 
                 return preg_match($pattern, $this->attribute($model)) != false;
             break;
