@@ -170,7 +170,7 @@ class QueryScopesTest extends TestCase
             $query->whereDay('created_at', now()->day);
         }));
         $this->assertTrue($john->passesScope(function ($query) {
-            $query->whereDay('created_at', (string) now()->subMonth()->day);
+            $query->whereDay('created_at', (string) now()->day);
         }));
         $this->assertTrue($john->passesScope(function ($query) {
             $query
