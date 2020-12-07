@@ -19,6 +19,10 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
      */
     protected $guarded = [];
 
+    protected $casts = [
+        'wants_newsletter' => 'boolean'
+    ];
+
     /**
      * @param Builder $query
      * @param $name

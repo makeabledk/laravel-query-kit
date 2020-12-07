@@ -31,6 +31,29 @@ class QueryScopesTest extends TestCase
         $this->assertFalse($person->passesScope('age', '<>', 27));
     }
 
+    public function test_where_with_boolean()
+    {
+        $person = $this->create('John Doe', 27);
+
+        $match = function ($bool) {
+            return function ($query) use ($bool) {
+                $query->where('wants_newsletter', $bool);
+            };
+        };
+
+        $person->wants_newsletter = null;
+        $this->assertFalse($person->passesScope($match(1)));
+        $this->assertFalse($person->passesScope($match(0)));
+
+        $person->wants_newsletter = true;
+        $this->assertTrue($person->passesScope($match(1)));
+        $this->assertFalse($person->passesScope($match(0)));
+
+        $person->wants_newsletter = false;
+        $this->assertTrue($person->passesScope($match(0)));
+        $this->assertFalse($person->passesScope($match(1)));
+    }
+
     public function test_where_like()
     {
         $person = $this->create('John Doe');

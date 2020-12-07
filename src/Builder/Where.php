@@ -107,7 +107,13 @@ class Where implements QueryConstraint
      */
     protected function attribute($model)
     {
-        return $model->{$this->property};
+        $value = $model->{$this->property};
+
+        if (is_bool($value)) {
+            return $value ? 1 : 0;
+        }
+
+        return $value;
     }
 
     /**
