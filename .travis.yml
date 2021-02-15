@@ -1,10 +1,13 @@
 language: php
 
-sudo: false
-
 cache:
   directories:
     - $HOME/.composer/cache
+
+
+env:
+    global:
+        - XDEBUG_MODE=coverage
 
 matrix:
   fast_finish: true
@@ -28,6 +31,10 @@ matrix:
       - php: 7.4
         env: LARAVEL='8.*' COMPOSER_FLAGS='--prefer-lowest'
       - php: 7.4
+        env: LARAVEL='8.*' COMPOSER_FLAGS='--prefer-stable'
+      - php: 8.0
+        env: LARAVEL='8.*' COMPOSER_FLAGS='--prefer-lowest'
+      - php: 8.0
         env: LARAVEL='8.*' COMPOSER_FLAGS='--prefer-stable'
 
 before_script:
