@@ -3,7 +3,7 @@
 # Laravel Query Kit
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/makeabledk/laravel-querykit.svg?style=flat-square)](https://packagist.org/packages/makeabledk/laravel-querykit)
-[![Build Status](https://img.shields.io/travis/makeabledk/laravel-query-kit/master.svg?style=flat-square)](https://travis-ci.org/makeabledk/laravel-query-kit)
+[![Build Status](https://img.shields.io/github/workflow/status/makeabledk/laravel-query-kit/Run%20tests?label=Tests)](https://github.com/makeabledk/laravel-query-kit/actions)
 [![StyleCI](https://styleci.io/repos/95551114/shield?branch=master)](https://styleci.io/repos/95551114)
 
 This package provides a handy way to query eloquent-scopes on model instances in Laravel.
