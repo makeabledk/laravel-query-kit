@@ -24,7 +24,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     ];
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @param $name
      * @return Builder
      */
@@ -34,7 +34,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @param $name
      * @return Builder
      */
@@ -44,7 +44,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @param $names
      * @return Builder
      */
@@ -54,7 +54,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @param $operator
      * @param $age
      * @return Builder
@@ -65,7 +65,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @return Builder
      */
     public function scopeHasAge($query)
@@ -74,7 +74,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @return Builder
      */
     public function scopeNoAge($query)
@@ -83,7 +83,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @return Builder
      */
     public function scopeOld($query)
@@ -92,7 +92,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @return Builder
      */
     public function scopeJaneOrJohn($query)
@@ -102,7 +102,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @return Builder
      */
     public function scopeHasNameOrAge($query)
@@ -111,7 +111,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @param Builder $query
+     * @param  Builder  $query
      * @return Builder
      */
     public function scopeMissingNameOrAge($query)

@@ -25,9 +25,9 @@ class WhereColumn implements QueryConstraint
     /**
      * WhereColumn constructor.
      *
-     * @param mixed $property
-     * @param mixed $operator
-     * @param mixed $propertyToCompare
+     * @param  mixed  $property
+     * @param  mixed  $operator
+     * @param  mixed  $propertyToCompare
      */
     public function __construct($property, $operator, $propertyToCompare)
     {
@@ -38,7 +38,6 @@ class WhereColumn implements QueryConstraint
 
     /**
      * @param $model
-     *
      * @return bool
      */
     public function check($model)

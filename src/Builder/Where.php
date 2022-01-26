@@ -25,7 +25,7 @@ class Where implements QueryConstraint
     /**
      * Where constructor.
      *
-     * @param array ...$args
+     * @param  array  ...$args
      */
     public function __construct(...$args)
     {
@@ -34,7 +34,6 @@ class Where implements QueryConstraint
 
     /**
      * @param $model
-     *
      * @return bool
      */
     public function check($model)
@@ -85,8 +84,7 @@ class Where implements QueryConstraint
     /**
      * @param $property
      * @param $operator
-     * @param null $value
-     *
+     * @param  null  $value
      * @return array
      */
     protected function normalize($property, $operator = null, $value = null)

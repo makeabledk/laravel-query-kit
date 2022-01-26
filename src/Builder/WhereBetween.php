@@ -33,7 +33,6 @@ class WhereBetween implements QueryConstraint
 
     /**
      * @param $model
-     *
      * @return bool
      */
     public function check($model)
