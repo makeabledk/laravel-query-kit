@@ -6,7 +6,6 @@ interface QueryConstraint
 {
     /**
      * @param $model
-     *
      * @return mixed
      */
     public function check($model);

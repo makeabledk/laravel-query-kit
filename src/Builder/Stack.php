@@ -21,8 +21,8 @@ class Stack
     }
 
     /**
-     * @param QueryConstraint $constraint
-     * @param bool $or
+     * @param  QueryConstraint  $constraint
+     * @param  bool  $or
      * @return Stack
      */
     public function apply(QueryConstraint $constraint, $or = false)
@@ -61,7 +61,7 @@ class Stack
     }
 
     /**
-     * @param Stack $stack
+     * @param  Stack  $stack
      * @param $model
      * @return bool
      */
@@ -73,7 +73,7 @@ class Stack
     }
 
     /**
-     * @param Collection $track
+     * @param  Collection  $track
      * @param $model
      * @return bool
      */

@@ -6,7 +6,6 @@ class WhereNotIn extends WhereIn
 {
     /**
      * @param $model
-     *
      * @return bool
      */
     public function check($model)
