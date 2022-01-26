@@ -32,7 +32,7 @@ class Builder
     /**
      * Builder constructor.
      *
-     * @param Model $model
+     * @param  Model  $model
      */
     public function __construct(Model $model)
     {
@@ -47,7 +47,6 @@ class Builder
      *
      * @param $method
      * @param $parameters
-     *
      * @return Builder
      */
     public function __call($method, $parameters)
@@ -77,8 +76,7 @@ class Builder
     /**
      * @param $model
      * @param $name
-     * @param array ...$args
-     *
+     * @param  array  ...$args
      * @return Builder
      */
     public static function make($model, $name, ...$args)
@@ -100,8 +98,7 @@ class Builder
 
     /**
      * @param $name
-     * @param array ...$args
-     *
+     * @param  array  ...$args
      * @return mixed
      */
     public function callScopeFunction($name, ...$args)

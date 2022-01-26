@@ -33,7 +33,6 @@ class WhereIn implements QueryConstraint
 
     /**
      * @param $model
-     *
      * @return bool
      */
     public function check($model)

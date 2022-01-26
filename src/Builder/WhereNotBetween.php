@@ -6,7 +6,6 @@ class WhereNotBetween extends WhereBetween
 {
     /**
      * @param $model
-     *
      * @return bool
      */
     public function check($model)

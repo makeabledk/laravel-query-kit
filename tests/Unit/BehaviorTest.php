@@ -9,7 +9,8 @@ class BehaviorTest extends TestCase
 {
     public function test_statements_are_bound_to_the_object()
     {
-        $class = new class extends TestModel {
+        $class = new class extends TestModel
+        {
             public function scopeJohnSenior($query)
             {
                 // This should take effect even if we don't return it to match Laravel behavior
