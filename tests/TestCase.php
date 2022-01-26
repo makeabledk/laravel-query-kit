@@ -16,7 +16,7 @@ class TestCase extends Orchestra
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      * @return array
      */
     protected function getPackageProviders($app)
@@ -27,7 +27,7 @@ class TestCase extends Orchestra
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      */
     protected function getEnvironmentSetUp($app)
     {
@@ -40,7 +40,7 @@ class TestCase extends Orchestra
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      */
     protected function setUpDatabase($app)
     {
@@ -54,8 +54,8 @@ class TestCase extends Orchestra
     }
 
     /**
-     * @param null $name
-     * @param null $age
+     * @param  null  $name
+     * @param  null  $age
      * @return TestModel
      */
     protected function create($name = null, $age = null)

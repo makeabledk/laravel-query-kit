@@ -10,8 +10,7 @@ trait QueryKit
      * Check if a model passes the given scope.
      *
      * @param $name
-     * @param array ...$args
-     *
+     * @param  array  ...$args
      * @return mixed
      */
     public function passesScope($name, ...$args)
@@ -23,8 +22,7 @@ trait QueryKit
      * Check if a model fails the given scope.
      *
      * @param $name
-     * @param array ...$args
-     *
+     * @param  array  ...$args
      * @return mixed
      */
     public function failsScope($name, ...$args)
