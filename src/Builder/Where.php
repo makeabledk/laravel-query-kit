@@ -45,22 +45,22 @@ class Where implements QueryConstraint
         switch ($this->operator) {
             case '=':
                 return $this->attribute($model) === $this->value();
-            break;
+                break;
             case '>=':
                 return $this->attribute($model) >= $this->value();
-            break;
+                break;
             case '<=':
                 return $this->attribute($model) <= $this->value();
-            break;
+                break;
             case '<>':
                 return $this->attribute($model) !== $this->value();
-            break;
+                break;
             case '>':
                 return $this->attribute($model) > $this->value();
-            break;
+                break;
             case '<':
                 return $this->attribute($model) < $this->value();
-            break;
+                break;
             case 'like':
                 $pattern = preg_quote($this->value());
                 $pattern = str_replace('%', '(.*?)', $pattern);
@@ -68,7 +68,7 @@ class Where implements QueryConstraint
                 $pattern = '/^'.$pattern.'$/si'; // allow linebreaks and case insensitive matches
 
                 return preg_match($pattern, $this->attribute($model)) != false;
-            break;
+                break;
         }
         throw new BadMethodCallException('Operator not supported: '.$this->operator);
     }
