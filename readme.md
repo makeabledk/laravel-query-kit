@@ -14,7 +14,7 @@ Well, Bon Voyage code-duplication. QueryKit is here to the rescue! 🔥
 
 --
 
-Makeable is web- and mobile app agency located in Aarhus, Denmark.
+Makeable is web and mobile app agency located in Aarhus, Denmark.
 
 ## Installation
 
