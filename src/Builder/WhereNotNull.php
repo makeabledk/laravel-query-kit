@@ -14,7 +14,7 @@ class WhereNotNull implements QueryConstraint
     /**
      * WhereNull constructor.
      *
-     * @param $property
+     * @param  $property
      */
     public function __construct($property)
     {
@@ -22,7 +22,7 @@ class WhereNotNull implements QueryConstraint
     }
 
     /**
-     * @param $model
+     * @param  $model
      * @return bool
      */
     public function check($model)

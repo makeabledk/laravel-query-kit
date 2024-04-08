@@ -19,8 +19,8 @@ class WhereIn implements QueryConstraint
     /**
      * WhereNull constructor.
      *
-     * @param $property
-     * @param $haystack
+     * @param  $property
+     * @param  $haystack
      */
     public function __construct($property, $haystack)
     {
@@ -32,7 +32,7 @@ class WhereIn implements QueryConstraint
     }
 
     /**
-     * @param $model
+     * @param  $model
      * @return bool
      */
     public function check($model)

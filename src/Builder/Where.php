@@ -33,7 +33,7 @@ class Where implements QueryConstraint
     }
 
     /**
-     * @param $model
+     * @param  $model
      * @return bool
      */
     public function check($model)
@@ -82,8 +82,8 @@ class Where implements QueryConstraint
     }
 
     /**
-     * @param $property
-     * @param $operator
+     * @param  $property
+     * @param  $operator
      * @param  null  $value
      * @return array
      */
@@ -100,7 +100,7 @@ class Where implements QueryConstraint
     }
 
     /**
-     * @param $model
+     * @param  $model
      * @return mixed
      */
     protected function attribute($model)

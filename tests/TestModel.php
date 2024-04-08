@@ -25,7 +25,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
 
     /**
      * @param  Builder  $query
-     * @param $name
+     * @param  $name
      * @return Builder
      */
     public function scopeNameIs($query, $name)
@@ -35,7 +35,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
 
     /**
      * @param  Builder  $query
-     * @param $name
+     * @param  $name
      * @return Builder
      */
     public function scopeNameLike($query, $name)
@@ -45,7 +45,7 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
 
     /**
      * @param  Builder  $query
-     * @param $names
+     * @param  $names
      * @return Builder
      */
     public function scopeNameIn($query, $names)
@@ -55,8 +55,8 @@ class TestModel extends \Illuminate\Database\Eloquent\Model
 
     /**
      * @param  Builder  $query
-     * @param $operator
-     * @param $age
+     * @param  $operator
+     * @param  $age
      * @return Builder
      */
     public function scopeAge($query, $operator, $age)

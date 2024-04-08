@@ -7,7 +7,7 @@ use Carbon\Carbon;
 class WhereDay extends Where
 {
     /**
-     * @param $model
+     * @param  $model
      * @return Carbon
      */
     protected function attribute($model)

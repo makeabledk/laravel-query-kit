@@ -5,7 +5,7 @@ namespace Makeable\QueryKit\Builder;
 class WhereNotBetween extends WhereBetween
 {
     /**
-     * @param $model
+     * @param  $model
      * @return bool
      */
     public function check($model)

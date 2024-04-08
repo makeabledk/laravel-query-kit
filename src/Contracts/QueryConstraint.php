@@ -5,7 +5,7 @@ namespace Makeable\QueryKit\Contracts;
 interface QueryConstraint
 {
     /**
-     * @param $model
+     * @param  $model
      * @return mixed
      */
     public function check($model);

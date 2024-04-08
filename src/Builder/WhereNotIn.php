@@ -5,7 +5,7 @@ namespace Makeable\QueryKit\Builder;
 class WhereNotIn extends WhereIn
 {
     /**
-     * @param $model
+     * @param  $model
      * @return bool
      */
     public function check($model)

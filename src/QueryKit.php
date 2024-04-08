@@ -9,7 +9,7 @@ trait QueryKit
     /**
      * Check if a model passes the given scope.
      *
-     * @param $name
+     * @param  $name
      * @param  array  ...$args
      * @return mixed
      */
@@ -21,7 +21,7 @@ trait QueryKit
     /**
      * Check if a model fails the given scope.
      *
-     * @param $name
+     * @param  $name
      * @param  array  ...$args
      * @return mixed
      */
