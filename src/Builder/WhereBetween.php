@@ -19,8 +19,8 @@ class WhereBetween implements QueryConstraint
     /**
      * WhereNull constructor.
      *
-     * @param $property
-     * @param $range
+     * @param  $property
+     * @param  $range
      */
     public function __construct($property, $range)
     {
@@ -32,7 +32,7 @@ class WhereBetween implements QueryConstraint
     }
 
     /**
-     * @param $model
+     * @param  $model
      * @return bool
      */
     public function check($model)

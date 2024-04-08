@@ -37,7 +37,7 @@ class WhereColumn implements QueryConstraint
     }
 
     /**
-     * @param $model
+     * @param  $model
      * @return bool
      */
     public function check($model)
@@ -78,7 +78,7 @@ class WhereColumn implements QueryConstraint
     }
 
     /**
-     * @param $model
+     * @param  $model
      * @return mixed
      */
     protected function attribute($model, $property)

@@ -35,7 +35,7 @@ class Stack
     }
 
     /**
-     * @param $constraint
+     * @param  $constraint
      * @return Stack
      */
     protected function newTrack($constraint)
@@ -46,7 +46,7 @@ class Stack
     }
 
     /**
-     * @param $constraint
+     * @param  $constraint
      * @return Stack
      */
     protected function push($constraint)
@@ -62,7 +62,7 @@ class Stack
 
     /**
      * @param  Stack  $stack
-     * @param $model
+     * @param  $model
      * @return bool
      */
     public function check($model)
@@ -74,7 +74,7 @@ class Stack
 
     /**
      * @param  Collection  $track
-     * @param $model
+     * @param  $model
      * @return bool
      */
     protected function passesTrack($track, $model)

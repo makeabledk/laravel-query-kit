@@ -7,7 +7,7 @@ use Carbon\Carbon;
 class WhereMonth extends Where
 {
     /**
-     * @param $model
+     * @param  $model
      * @return Carbon
      */
     protected function attribute($model)

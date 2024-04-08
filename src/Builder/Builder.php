@@ -45,8 +45,8 @@ class Builder
     /**
      * Call a registered constraint type.
      *
-     * @param $method
-     * @param $parameters
+     * @param  $method
+     * @param  $parameters
      * @return Builder
      */
     public function __call($method, $parameters)
@@ -74,8 +74,8 @@ class Builder
     }
 
     /**
-     * @param $model
-     * @param $name
+     * @param  $model
+     * @param  $name
      * @param  array  ...$args
      * @return Builder
      */
@@ -87,7 +87,7 @@ class Builder
     /**
      * Register a new constraint type.
      *
-     * @param $class
+     * @param  $class
      */
     public static function registerConstraint($class)
     {
@@ -97,7 +97,7 @@ class Builder
     }
 
     /**
-     * @param $name
+     * @param  $name
      * @param  array  ...$args
      * @return mixed
      */
