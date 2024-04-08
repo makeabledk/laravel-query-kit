@@ -8,7 +8,7 @@
 
 This package provides a handy way to query eloquent-scopes on model instances in Laravel.
 
-Traditionally you may find yourself having a `scopeAccepted` and then additionally a `ìsAccepted` helper method on your model. 
+Traditionally you may find yourself having a `scopeAccepted` and then additionally a `ìsAccepted` helper method on your model.
 
 Well, Bon Voyage code-duplication. QueryKit is here to the rescue! 🔥
 
@@ -40,7 +40,7 @@ Whenever you have a query scope on an Eloquent Model, you can apply the followin
 ```php
 class Job extends Eloquent {
     use \Makeable\QueryKit\QueryKit;
-    
+
     public function scopeHired($query)
     {
         return $query->whereIn('status', ['started', 'finished']);
@@ -66,13 +66,13 @@ Pretty cool, right?
 
 See **Currently supported methods** further down.
 
-## Provided methods on `QueryKit` 
+## Provided methods on `QueryKit`
 
 ### passesScope
 ```php
 /**
  * Check if a model passes the given scope
- * 
+ *
  * @param $name
  * @param array ...$args
  * @return bool
@@ -84,7 +84,7 @@ public function passesScope($name, ...$args)
 ```php
 /**
  * Check if a model fails the given scope
- * 
+ *
  * @param $name
  * @param array ...$args
  * @return bool
