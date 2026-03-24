@@ -8,6 +8,13 @@ use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
+    /**
+     * Compatibility with newer Orchestra Testbench / PHPUnit internals.
+     *
+     * @var \Illuminate\Testing\TestResponse|null
+     */
+    public static $latestResponse;
+
     public function setUp(): void
     {
         parent::setUp();
