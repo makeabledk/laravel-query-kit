@@ -13,7 +13,7 @@ class TestCase extends Orchestra
      *
      * @var \Illuminate\Testing\TestResponse|null
      */
-    protected static $latestResponse;
+    public static $latestResponse;
 
     public function setUp(): void
     {
